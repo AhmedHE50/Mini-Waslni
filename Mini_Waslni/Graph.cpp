@@ -1,6 +1,9 @@
 #include "Graph.h"
 #include <iostream>
 #include <algorithm>
+#include<queue>
+#include<list>
+#include<map>
 
 // Define the graph type to easily written
 typedef unordered_map<string, list<pair<string, double>>> CityGraph;
@@ -31,4 +34,28 @@ void Graph::addRoad(const string& fromCity, const string& toCity, double dist) {
     cities[toCity].emplace_back(fromCity, dist);
 
     cout << "Road added between '" << fromCity << "' and '" << toCity << "' with distance " << dist << "." << endl;
+}
+void Graph::BFS(string& cityName) {
+	queue<string> Names;
+	Names.push(cityName);
+	//int n = cities[cityName].size();
+	map<string, bool>Visited;
+	for (const auto& pair : cities) {
+		Visited[pair.first] = 0;
+	}
+	//fill(Visited, Visited + n, 0);
+	Visited[cityName] = 1;
+	while (!Names.empty()) {
+		string currentCity = Names.front();
+		Names.pop();
+		cout << currentCity << ' ';
+		list<pair<string, double>> Neigbours = cities[currentCity];
+		for (auto it : Neigbours) {
+			if (Visited[it.first] != 1) {
+				Names.push(it.first);
+				Visited[it.first] = 1;
+			}
+		}
+		
+	}
 }

@@ -23,6 +23,7 @@ public:
 	void addRoad(const string& fromCity, const string& toCity, double dist);
 	void deleteCity(const string& cityName);
 	void deleteRoad(const string& fromCity, const string& toCity);
+	void BFS(string& cityName);
 
 	CityGraph& getAllCities() {
 		return cities;

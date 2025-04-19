@@ -15,6 +15,7 @@ int main() {
 
     graph.addRoad(c, a, 200.5);
     graph.addRoad(c, g, 10.2);
+    graph.BFS(c);
 
 	return 0;
 }
