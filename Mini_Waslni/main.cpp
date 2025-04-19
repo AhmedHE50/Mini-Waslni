@@ -8,14 +8,19 @@ int main() {
     string c = "Cairo";
     string a = "Alexandria";
     string g = "Giza";
+    string s = "sharm";
 
     graph.addCity(c);
     graph.addCity(a);
     graph.addCity(g);
+    graph.addCity(s);
 
     graph.addRoad(c, a, 200.5);
     graph.addRoad(c, g, 10.2);
-    graph.deleteCity(c);
+    graph.addRoad(c, s, 10.2);
+    graph.addRoad(a, s, 10.2);
+
+    graph.deleteRoad(c, g);
     graph.BFS(a);
 
 	return 0;
