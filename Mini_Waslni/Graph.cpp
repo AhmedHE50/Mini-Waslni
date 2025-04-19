@@ -2,7 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <list>
-#include <map>
+#include <stack>
 
 // Define the graph type to easily written
 typedef unordered_map<string, list<pair<string, double>>> CityGraph;
@@ -108,11 +108,11 @@ void Graph::deleteRoad(const string& fromCity, const string& toCity) {
     }
 }
 
-void Graph::BFS(string& cityName) {
+void Graph::BFS(const string& cityName) {
 	queue<string> Names;
 	Names.push(cityName);
 	//int n = cities[cityName].size();
-	map<string, bool>Visited;
+    unordered_map<string, bool>Visited;
 	for (const auto& pair : cities) {
 		Visited[pair.first] = 0;
 	}
@@ -131,4 +131,30 @@ void Graph::BFS(string& cityName) {
 		}
 		
 	}
+    cout << '\n';
+}
+               
+void Graph::DFS(const string& start) {
+    unordered_map<string, bool> visited;
+    stack<string> s;
+
+    visited[start] = true;
+    s.push(start);
+
+    while (!s.empty()) {
+        string current = s.top();
+        s.pop();
+
+
+        cout << current << ' ';
+
+        for (auto& neighbor : cities.at(current)) {
+            if (!visited[neighbor.first]) {
+                s.push(neighbor.first);
+                visited[neighbor.first] = true;
+            }
+        }
+    }
+
+    cout << '\n';
 }

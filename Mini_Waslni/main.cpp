@@ -20,8 +20,8 @@ int main() {
     graph.addRoad(c, s, 10.2);
     graph.addRoad(a, s, 10.2);
 
-    graph.deleteRoad(c, g);
     graph.BFS(a);
+    graph.DFS(a);
 
 	return 0;
 };
