@@ -10,7 +10,7 @@ typedef unordered_map<string, list<pair<string, double>>> CityGraph;
 * each neighbor -> cityName and distance bet. them
 */
 
-void Graph::addCity(string& cityName) {
+void Graph::addCity(const string& cityName) {
     if (cities.find(cityName) == cities.end()) {
         cities[cityName] = {}; // Add the city with empty list
         cout << "City '" << cityName << "' added successfully." << endl;
@@ -20,7 +20,7 @@ void Graph::addCity(string& cityName) {
     }
 }
 
-void Graph::addRoad(string& fromCity, string& toCity, double dist) {
+void Graph::addRoad(const string& fromCity, const string& toCity, double dist) {
     if (cities.find(fromCity) == cities.end() || cities.find(toCity) == cities.end()) {
         cout << "One or both cities do not exist." << endl;
         return;

@@ -19,10 +19,10 @@ private:
 	CityGraph cities;
 
 public:
-	void addCity(string& cityName);
-	void addRoad(string& fromCity, string& toCity, double dist);
-	// void deleteCity(string& cityName);
-	// void deleteRoad(string& fromCity, string& toCity);
+	void addCity(const string& cityName);
+	void addRoad(const string& fromCity, const string& toCity, double dist);
+	void deleteCity(const string& cityName);
+	void deleteRoad(const string& fromCity, const string& toCity);
 
 	CityGraph& getAllCities() {
 		return cities;
