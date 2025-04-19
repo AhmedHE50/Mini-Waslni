@@ -35,6 +35,35 @@ void Graph::addRoad(const string& fromCity, const string& toCity, double dist) {
 
     cout << "Road added between '" << fromCity << "' and '" << toCity << "' with distance " << dist << "." << endl;
 }
+
+void Graph::deleteCity(const string& cityName) {
+    if (cities.find(cityName) != cities.end()) {
+        // Remove the city from the graph
+        cities.erase(cityName);
+        cout << "City '" << cityName << "' deleted successfully." << endl;
+
+        // Remove all roads pointing to the deleted city
+        for (auto it = cities.begin(); it != cities.end(); ++it) {
+            auto& roads = it->second;
+
+            auto roadIt = roads.begin();
+            while (roadIt != roads.end()) {
+                if (roadIt->first == cityName) {
+                    roadIt = roads.erase(roadIt); // Erase the road and move to the next
+                }
+                else {
+                    ++roadIt; // Move to the next road
+                }
+            }
+        }
+
+        cout << "All roads connected to '" << cityName << "' deleted." << endl;
+    }
+    else {
+        cout << "City '" << cityName << "' does not exist." << endl;
+    }
+}
+
 void Graph::BFS(string& cityName) {
 	queue<string> Names;
 	Names.push(cityName);
