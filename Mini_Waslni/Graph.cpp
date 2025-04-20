@@ -4,7 +4,7 @@
 #include <list>
 #include <stack>
 #include <map>
-
+#include <limits>
 
 // Define the graph type to easily written
 typedef unordered_map<string, list<pair<string, double>>> CityGraph;
@@ -160,27 +160,27 @@ void Graph::DFS(const string& start) {
 
     cout << '\n';
 }
-map<string, pair<int, string>> Graph::Dijkstra(const string& cityName)
+map<string, pair<double, string>> Graph::Dijkstra(const string& cityName)
 {
     // key: the city || pair<int, string> int: distance from source, string: city where i came from
-    map<string, pair<int, string>> shortestPathsFromTheSource;
+    map<string, pair<double, string>> shortestPathsFromTheSource;
     if(cities.find(cityName) != cities.end())
     { 
         // int : distance from the source, string: the city of this distance
-        priority_queue<pair<int,string>, vector<pair<int,string>>, greater<pair<int, string>>> pq;
-        unordered_map<string, int> distToCities;
+        priority_queue<pair<double,string>, vector<pair<double,string>>, greater<pair<double, string>>> pq;
+        unordered_map<string, double> distToCities;
         unordered_map<string, bool> Visited;
         // collecting keys and initialising it
         for (auto it : cities)
         {
-            distToCities.insert({ it.first, INT_MAX });
+            distToCities.insert({ it.first, numeric_limits<double>::max()});
         }
         distToCities[cityName] = 0;
         shortestPathsFromTheSource.insert({ cityName, {0,"-"} });
         pq.push({ 0,cityName });
         while (!pq.empty())
         {
-            int dist = pq.top().first;
+            double dist = pq.top().first;
             string city = pq.top().second;
             pq.pop();
             Visited[city] = 1;
