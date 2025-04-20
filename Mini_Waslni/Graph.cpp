@@ -114,10 +114,6 @@ map<string,int> Graph::BFS(const string& cityName) {
     Names.push({ cityName,0 });
 	//int n = cities[cityName].size();
     unordered_map<string, bool>Visited;
-	for (const auto& pair : cities) {
-		Visited[pair.first] = 0;
-	}
-	//fill(Visited, Visited + n, 0);
 	Visited[cityName] = 1;
     // to record distances of cities from the source to all other cities
     map<string, int> distances;
@@ -127,15 +123,13 @@ map<string,int> Graph::BFS(const string& cityName) {
         int dist = Names.front().second;
 		Names.pop();
 		cout << currentCity << ' ';
-		list<pair<string, double>> Neigbours = cities[currentCity];
-		for (auto it : Neigbours) {
-            if (Visited[it.first] != 1) {
-                Names.push({it.first, dist + 1});
+		for (auto& it : cities[currentCity]) {
+			if (Visited[it.first] != 1) {
+                Names.push({ it.first, dist + 1 });
 				Visited[it.first] = 1;
                 distances.insert({ it.first, dist + 1 });
 			}
 		}
-		
 	}
     cout << '\n';
     return distances;
