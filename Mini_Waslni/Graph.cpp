@@ -3,6 +3,7 @@
 #include <queue>
 #include <list>
 #include <stack>
+#include <map>
 
 // Define the graph type to easily written
 typedef unordered_map<string, list<pair<string, double>>> CityGraph;
@@ -108,9 +109,9 @@ void Graph::deleteRoad(const string& fromCity, const string& toCity) {
     }
 }
 
-void Graph::BFS(const string& cityName) {
-	queue<string> Names;
-	Names.push(cityName);
+map<string,int> Graph::BFS(const string& cityName) {
+	queue<pair<string,int>> Names; // int: distance from the source city
+    Names.push({ cityName,0 });
 	//int n = cities[cityName].size();
     unordered_map<string, bool>Visited;
 	for (const auto& pair : cities) {
@@ -118,20 +119,26 @@ void Graph::BFS(const string& cityName) {
 	}
 	//fill(Visited, Visited + n, 0);
 	Visited[cityName] = 1;
+    // to record distances of cities from the source to all other cities
+    map<string, int> distances;
+    distances.insert({ cityName,0 });
 	while (!Names.empty()) {
-		string currentCity = Names.front();
+		string currentCity = Names.front().first;
+        int dist = Names.front().second;
 		Names.pop();
 		cout << currentCity << ' ';
 		list<pair<string, double>> Neigbours = cities[currentCity];
 		for (auto it : Neigbours) {
-			if (Visited[it.first] != 1) {
-				Names.push(it.first);
+            if (Visited[it.first] != 1) {
+                Names.push({it.first, dist + 1});
 				Visited[it.first] = 1;
+                distances.insert({ it.first, dist + 1 });
 			}
 		}
 		
 	}
     cout << '\n';
+    return distances;
 }
                
 void Graph::DFS(const string& start) {
