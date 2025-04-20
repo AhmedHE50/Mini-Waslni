@@ -111,25 +111,20 @@ void Graph::deleteRoad(const string& fromCity, const string& toCity) {
 void Graph::BFS(const string& cityName) {
 	queue<string> Names;
 	Names.push(cityName);
-	//int n = cities[cityName].size();
     unordered_map<string, bool>Visited;
-	for (const auto& pair : cities) {
-		Visited[pair.first] = 0;
-	}
-	//fill(Visited, Visited + n, 0);
 	Visited[cityName] = 1;
+
 	while (!Names.empty()) {
 		string currentCity = Names.front();
 		Names.pop();
 		cout << currentCity << ' ';
-		list<pair<string, double>> Neigbours = cities[currentCity];
-		for (auto it : Neigbours) {
+
+		for (auto& it : cities[currentCity]) {
 			if (Visited[it.first] != 1) {
 				Names.push(it.first);
 				Visited[it.first] = 1;
 			}
 		}
-		
 	}
     cout << '\n';
 }
