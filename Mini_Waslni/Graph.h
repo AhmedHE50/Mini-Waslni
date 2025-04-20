@@ -25,7 +25,7 @@ public:
 	void deleteCity(const string& cityName);
 	void deleteRoad(const string& fromCity, const string& toCity);
 	map<string,int> BFS(const string& cityName);
-	void Dijkstra(const string& cityName);
+	map<string, pair<int, string>> Dijkstra(const string& cityName);
 	void DFS(const string& start);
 
 
