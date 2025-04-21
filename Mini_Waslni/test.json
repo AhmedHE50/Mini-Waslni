@@ -1,0 +1,60 @@
+{
+    "Alexandria": [
+        {
+            "distance": 200.5,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 10.2,
+            "neighbor": "sharm"
+        }
+    ],
+    "Cairo": [
+        {
+            "distance": 200.5,
+            "neighbor": "Alexandria"
+        },
+        {
+            "distance": 3.69,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 10.2,
+            "neighbor": "sharm"
+        }
+    ],
+    "Giza": [
+        {
+            "distance": 3.69,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 3.4,
+            "neighbor": "sharm"
+        }
+    ],
+    "Idlib": [
+        {
+            "distance": 1.67,
+            "neighbor": "sharm"
+        }
+    ],
+    "sharm": [
+        {
+            "distance": 10.2,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 10.2,
+            "neighbor": "Alexandria"
+        },
+        {
+            "distance": 3.4,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 1.67,
+            "neighbor": "Idlib"
+        }
+    ]
+}

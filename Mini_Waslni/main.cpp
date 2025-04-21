@@ -1,3 +1,4 @@
+#include "FileManager.h"
 #include "Graph.h"
 #include <iostream>
 typedef map<string, pair<double, string>> dijk;
@@ -6,7 +7,7 @@ using namespace std;
 int main() {
     Graph graph;
 
-    string c = "Cairo";
+    /*string c = "Cairo";
     string a = "Alexandria";
     string g = "Giza";
     string s = "sharm";
@@ -22,11 +23,13 @@ int main() {
     graph.addRoad(c, s, 10.2);
     graph.addRoad(a, s, 10.2);
     graph.addRoad(s, g, 3.4);
-    graph.addRoad(i,s,1.67);
+    graph.addRoad(i,s,1.67);*/
 
-    auto res = graph.BFS(a);
+    FileManager::loadGraph(graph, "test.json");
+
+    auto res = graph.BFS("Alexandria");
     //graph.DFS(a);
-    dijk result = graph.Dijkstra(c);
+    dijk result = graph.Dijkstra("Cairo");
     cout << endl;
     for (auto it : res)
     {
@@ -42,6 +45,7 @@ int main() {
             << it.second.second << endl;
     }
 
+    FileManager::saveGraph(graph, "test.json");
 
 	return 0;
 };
