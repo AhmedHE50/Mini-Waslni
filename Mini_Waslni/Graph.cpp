@@ -5,6 +5,7 @@
 #include <stack>
 #include <map>
 #include <limits>
+#include <set>
 
 // Define the graph type to easily written
 typedef unordered_map<string, list<pair<string, double>>> CityGraph;
@@ -197,4 +198,124 @@ map<string, pair<double, string>> Graph::Dijkstra(const string& cityName)
         
     }
     return shortestPathsFromTheSource;
+}
+
+map<double, vector<pair<string, string>>> Graph::roadExtract(CityGraph& cities)
+{
+    map<double, vector< pair<string, string>>> roads;//container to hold all edges
+    set<pair<string, string>> uniqueRoads; //count each road only one time
+    for (auto it = cities.begin(); it != cities.end(); ++it) {
+        string city = it->first;
+        list<pair<string, double>>& neighbors = it->second;
+        for (auto neighborIt = neighbors.begin(); neighborIt != neighbors.end(); ++neighborIt) {
+            string neighbor = neighborIt->first;
+            double weight = neighborIt->second;
+            string a = min(city, neighbor);
+            string b = max(city, neighbor);
+            if (!uniqueRoads.count({ a, b })) {
+                roads[weight].push_back({ a, b });
+                uniqueRoads.insert({ a, b });
+            }
+        }
+    }
+    return roads;
+}
+
+bool Graph:: hasCycle(unordered_map<string, vector<string>>& graph, const string& current, unordered_map<string, bool>& visited, const string& parent) {
+
+    visited[current] = true;
+    //basic cycle detection
+    for (const string& neighbor : graph.at(current)) {
+        if (!visited[neighbor]) {
+            if (hasCycle(graph, neighbor, visited, current))
+                return true;
+        }
+        //cycle
+        else if (neighbor != parent) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Graph:: kruskalMST(CityGraph& cities) {
+
+    map<double, vector<pair<string, string>>> sortedEdges = roadExtract(cities); //container to hold all roads
+    set<string> uniqueCities; //count total number of nodes
+
+    for (auto it = cities.begin(); it != cities.end(); ++it) {
+        string city = it->first;
+        uniqueCities.insert(city);
+
+        list<pair<string, double>>& neighbors = it->second;
+        for (auto neighborIt = neighbors.begin(); neighborIt != neighbors.end(); ++neighborIt) {
+            string neighbor = neighborIt->first;
+            uniqueCities.insert(neighbor);
+        }
+    }
+    int cityCount = uniqueCities.size();
+
+    vector<pair<pair<string, string>, double>> mst; //store mimimum spanning tree edges
+    unordered_map<string, vector<string>> mstGraph; //empty graph for mst
+
+    //initial graph with only nodes
+    for (set<string>::iterator cityIt = uniqueCities.begin(); cityIt != uniqueCities.end(); ++cityIt) {
+        mstGraph[*cityIt] = vector<string>();
+    }
+
+    //iterate ascendingly by cost
+    for (map<double, vector<pair<string, string>>>::iterator edgeIt = sortedEdges.begin();
+        edgeIt != sortedEdges.end(); ++edgeIt) {
+
+        double weight = edgeIt->first;
+        vector<pair<string, string>>& edgeList = edgeIt->second;
+
+        for (unsigned int i = 0; i < edgeList.size(); ++i) {
+            string u = edgeList[i].first;
+            string v = edgeList[i].second;
+
+            //simulate add
+            mstGraph[u].push_back(v);
+            mstGraph[v].push_back(u);
+
+            //check for cycles
+            unordered_map<string, bool> visited;
+            bool cycleFound = false;
+
+            for (set<string>::iterator cityIt = uniqueCities.begin(); cityIt != uniqueCities.end(); ++cityIt) { //vis[]={} initial
+                visited[*cityIt] = false;
+            }
+
+            if (hasCycle(mstGraph, u, visited, "")) { //detect cycle
+                cycleFound = true;
+            }
+
+            if (cycleFound) { //remove edge
+                
+                vector<string>& uNeighbors = mstGraph[u];
+                uNeighbors.erase(remove(uNeighbors.begin(), uNeighbors.end(), v), uNeighbors.end());
+
+                vector<string>& vNeighbors = mstGraph[v];
+                vNeighbors.erase(remove(vNeighbors.begin(), vNeighbors.end(), u), vNeighbors.end());
+            }
+            else {
+                mst.push_back(make_pair(make_pair(u, v), weight)); //add edge
+
+                if (mst.size() == cityCount - 1) { //process is complete after reaching n-1 edges
+                    
+                    cout << "Minimum Spanning Tree:" << endl;
+                    double totalWeight = 0.0;
+                    for (int j = 0; j < mst.size(); ++j) {
+                        cout << mst[j].first.first << " -- " << mst[j].first.second
+                            << " : " << mst[j].second << endl;
+                        totalWeight += mst[j].second;
+                    }
+                    cout << "Total MST weight: " << totalWeight << endl;
+
+                    return;
+                }
+            }
+        }
+    }
+
 }

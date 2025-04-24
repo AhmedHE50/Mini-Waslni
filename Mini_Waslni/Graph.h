@@ -27,6 +27,9 @@ public:
 	map<string,int> BFS(const string& cityName);
 	map<string, pair<double, string>> Dijkstra(const string& cityName);
 	void DFS(const string& start);
+	map<double, vector<pair<string, string>>> roadExtract(CityGraph& cities);
+	bool hasCycle(unordered_map<string, vector<string>>& graph, const string& current, unordered_map<string, bool>& visited, const string& parent);
+	void kruskalMST(CityGraph& cities);
 
 
 	CityGraph& getAllCities() {
