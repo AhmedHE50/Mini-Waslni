@@ -1,0 +1,11 @@
+release/FileManager.o
+release/Graph.o
+release/GraphOperationsWindow.o
+release/GraphTraversalWindow.o
+release/MainWindow.o
+release/ShortestPathWindow.o
+release/main.o
+release/moc_GraphOperationsWindow.o
+release/moc_GraphTraversalWindow.o
+release/moc_MainWindow.o
+release/moc_ShortestPathWindow.o
