@@ -35,6 +35,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *btnBFS;
     QPushButton *btnDFS;
+    QHBoxLayout *horizontalLayout_3;
     QGroupBox *resultsGroup;
     QVBoxLayout *verticalLayout_3;
     QTextEdit *traversalResultsTextEdit;
@@ -82,6 +83,11 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
 
 
         verticalLayout->addWidget(traversalGroup);

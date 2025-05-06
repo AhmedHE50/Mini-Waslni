@@ -21,18 +21,23 @@ private:
     CityGraph cities;
 
 public:
+    // Graph Modification
     void addCity(const string& cityName);
     void addRoad(const string& fromCity, const string& toCity, double dist);
     void deleteCity(const string& cityName);
     void deleteRoad(const string& fromCity, const string& toCity);
+
+    // Graph Traversal
     vector<string> BFS(const string& cityName);
     vector<string> DFS(const string& start);
-    map<string, pair<double, string>> Dijkstra(const string& source);
 
+    // Graph Algorithms
+    map<string, pair<double, string>> Dijkstra(const string& source);
     map<double, vector<pair<string, string>>> roadExtract(CityGraph& cities);
     bool hasCycle(unordered_map<string, vector<string>>& graph, const string& current, unordered_map<string, bool>& visited, const string& parent);
     void kruskalMST(CityGraph& cities);
 
+    // Getters
     CityGraph& getAllCities();
     const CityGraph& getAllCities() const;
 };

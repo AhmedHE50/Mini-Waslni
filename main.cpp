@@ -14,11 +14,17 @@ int main(int argc, char *argv[]) {
     // Load graph data at the beginning
     Graph graph;
     try {
-        FileManager::loadGraph(graph, "D:/University/DS/Mini-Waslni/graph.json");
+        FileManager::loadGraph(graph, "graph_data.json");
         mainWindow.setGraph(graph);
     } catch (const std::runtime_error& error) {
         QMessageBox::critical(nullptr, "File Error", QString::fromStdString(error.what()));
-        // Don't exit - let the user work with an empty graph if needed
+    }
+
+    // Load city positions at the beginning
+    try {
+        mainWindow.setCityPositionsFile("city_positions.json");
+    } catch (const std::runtime_error& error) {
+        QMessageBox::critical(nullptr, "File Error", QString::fromStdString(error.what()));
     }
 
     int result = a.exec();

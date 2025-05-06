@@ -43,7 +43,8 @@ template <> constexpr inline auto ShortestPathWindow::qt_create_metaobjectdata<q
         "",
         "on_sourceCityComboBox_currentIndexChanged",
         "index",
-        "on_destCityComboBox_currentIndexChanged"
+        "on_destCityComboBox_currentIndexChanged",
+        "showNextPathStep"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -57,6 +58,8 @@ template <> constexpr inline auto ShortestPathWindow::qt_create_metaobjectdata<q
         QtMocHelpers::SlotData<void(int)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { QMetaType::Int, 4 },
         }}),
+        // Slot 'showNextPathStep'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -83,6 +86,7 @@ void ShortestPathWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 0: _t->on_btnFindPath_clicked(); break;
         case 1: _t->on_sourceCityComboBox_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 2: _t->on_destCityComboBox_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 3: _t->showNextPathStep(); break;
         default: ;
         }
     }
@@ -107,14 +111,14 @@ int ShortestPathWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

@@ -41,7 +41,8 @@ template <> constexpr inline auto GraphTraversalWindow::qt_create_metaobjectdata
         "GraphTraversalWindow",
         "on_btnBFS_clicked",
         "",
-        "on_btnDFS_clicked"
+        "on_btnDFS_clicked",
+        "showNextTraversalStep"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -49,6 +50,8 @@ template <> constexpr inline auto GraphTraversalWindow::qt_create_metaobjectdata
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnDFS_clicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'showNextTraversalStep'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -74,6 +77,7 @@ void GraphTraversalWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         switch (_id) {
         case 0: _t->on_btnBFS_clicked(); break;
         case 1: _t->on_btnDFS_clicked(); break;
+        case 2: _t->showNextTraversalStep(); break;
         default: ;
         }
     }
@@ -99,14 +103,14 @@ int GraphTraversalWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

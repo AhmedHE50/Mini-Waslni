@@ -3,27 +3,30 @@
 #include "FileManager.h"
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QTimer>
+#include <QDebug>
 
-ShortestPathWindow::ShortestPathWindow(Graph* graph, QWidget *parent) :
+ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ShortestPathWindow),
-    graph(graph)
+    graph(graph),
+    mapWindow(mapWindow),
+    currentPathStep(0)
 {
     ui->setupUi(this);
     setWindowTitle("Shortest Path Finder");
 
-    // Initialize city list model
     cityListModel = new QStringListModel(this);
 
-    // Update city list
     updateCityList();
 
-    // Setup combo boxes
     ui->sourceCityComboBox->setModel(cityListModel);
     ui->destCityComboBox->setModel(cityListModel);
 
-    // Clear results area
     ui->pathResultsTextEdit->clear();
+
+    pathAnimationTimer = new QTimer(this);
+    connect(pathAnimationTimer, &QTimer::timeout, this, &ShortestPathWindow::showNextPathStep);
 
     setStyleSheet(R"(
         QDialog {
@@ -37,11 +40,26 @@ ShortestPathWindow::ShortestPathWindow(Graph* graph, QWidget *parent) :
             background-color: #fb8c00; /* (dark orange) */
         }
     )");
+
+    // Initialize the map window if it exists
+    if (mapWindow) {
+        setMapWindow(mapWindow);
+    }
+
 }
 
 ShortestPathWindow::~ShortestPathWindow()
 {
     delete ui;
+}
+
+void ShortestPathWindow::setMapWindow(MapWindow* mapWindow)
+{
+    this->mapWindow = mapWindow;
+    if (mapWindow) {
+        mapWindow->getMapVisualization()->updateMap();
+        mapWindow->setWindowModality(Qt::NonModal);
+    }
 }
 
 void ShortestPathWindow::updateCityList()
@@ -88,6 +106,41 @@ void ShortestPathWindow::on_btnFindPath_clicked()
 
     // Display the shortest path
     displayPath(currentDestination);
+
+    // Start visual animation
+    if (mapWindow) {
+        if (!mapWindow->isVisible()) {
+            mapWindow->show();
+        }
+        mapWindow->raise();
+        mapWindow->activateWindow();
+
+        MapVisualization* visualization = mapWindow->getMapVisualization();
+        if (visualization) {
+            visualization->updateMap();
+            startPathVisualization();
+        } else {
+            QMessageBox::warning(this, "Visualization Error", "Cannot show path visualization - map component is missing.");
+        }
+    } else {
+        QMessageBox::information(this, "Visualization", "Path found but no map window is available for visualization.");
+
+        // Create a new map window if it doesn't exist
+        mapWindow = new MapWindow(graph, this);
+        mapWindow->show();
+
+        // Update the reference and try again
+        this->setMapWindow(mapWindow);
+
+        // Recursive call now that we have a map window
+        QTimer::singleShot(500, this, [this]() {
+            MapVisualization* visualization = mapWindow->getMapVisualization();
+            if (visualization) {
+                visualization->updateMap();
+                startPathVisualization();
+            }
+        });
+    }
 }
 
 void ShortestPathWindow::displayPath(const std::string& destination)
@@ -102,16 +155,16 @@ void ShortestPathWindow::displayPath(const std::string& destination)
     double totalDistance = shortestPaths[destination].first;
 
     // Reconstruct the path
-    std::vector<std::string> path = reconstructPath(currentSource, destination);
+    pathCities = reconstructPath(currentSource, destination);
 
     QString result = "Shortest Path from " + QString::fromStdString(currentSource) +
                      " to " + QString::fromStdString(destination) + ":\n\n";
 
     // Display the path
-    for (size_t i = 0; i < path.size(); ++i) {
-        result += QString::fromStdString(path[i]);
+    for (size_t i = 0; i < pathCities.size(); ++i) {
+        result += QString::fromStdString(pathCities[i]);
 
-        if (i < path.size() - 1) {
+        if (i < pathCities.size() - 1) {
             result += " → ";
         }
     }
@@ -138,14 +191,128 @@ std::vector<std::string> ShortestPathWindow::reconstructPath(const std::string& 
     return path;
 }
 
+void ShortestPathWindow::startPathVisualization()
+{
+    if (!mapWindow) {
+        return;
+    }
+
+    if (pathCities.empty()) {
+        return;
+    }
+
+    // Reset visualization state
+    resetVisualization();
+    currentPathStep = 0;
+
+    // Disable the find path button during animation
+    ui->btnFindPath->setEnabled(false);
+
+    // Start the animation timer
+    pathAnimationTimer->setInterval(500);
+    pathAnimationTimer->start();
+}
+
+void ShortestPathWindow::resetVisualization()
+{
+    // Reset any highlights in the map visualization
+    if (mapWindow) {
+        MapVisualization* visualization = mapWindow->getMapVisualization();
+        if (visualization) {
+            visualization->setSelectedCity("");
+            visualization->setVisitedCities(QStringList());
+            visualization->setCurrentPath(QStringList());
+            visualization->update();
+        }
+    }
+}
+
+void ShortestPathWindow::showNextPathStep()
+{
+    if (currentPathStep >= static_cast<int>(pathCities.size())) {
+        // End of path animation
+        pathAnimationTimer->stop();
+
+        // Re-enable find path button
+        ui->btnFindPath->setEnabled(true);
+        return;
+    }
+
+    MapVisualization* visualization = mapWindow->getMapVisualization();
+    if (!visualization) {
+        pathAnimationTimer->stop();
+        ui->btnFindPath->setEnabled(true);
+        return;
+    }
+
+    // Get the current city to highlight
+    QString currentCity = QString::fromStdString(pathCities[currentPathStep]);
+
+    // Get the list of visited cities so far
+    QStringList visitedCities;
+    for (int i = 0; i <= currentPathStep; i++) {
+        visitedCities.append(QString::fromStdString(pathCities[i]));
+    }
+
+    // Update the current path if there's a previous city
+    QStringList currentPath;
+    if (currentPathStep > 0) {
+        for (int i = 0; i < currentPathStep; i++) {
+            currentPath.append(QString::fromStdString(pathCities[i]));
+            currentPath.append(QString::fromStdString(pathCities[i + 1]));
+        }
+    }
+
+    // Update the properties
+    visualization->setSelectedCity(currentCity);
+    visualization->setVisitedCities(visitedCities);
+    visualization->setCurrentPath(currentPath);
+
+    // Repaint the map
+    visualization->update();
+
+    // Highlight the corresponding text in the results
+    highlightPathText(currentPathStep);
+
+    // Move to next step
+    currentPathStep++;
+}
+
+void ShortestPathWindow::highlightPathText(int step)
+{
+    // Calculate the position in the text to highlight
+    QString resultText = ui->pathResultsTextEdit->toPlainText();
+    int startPos = resultText.indexOf(QString::fromStdString(pathCities[0]));
+
+    // Find the position of the current city in the text
+    int currentPos = 0;
+    int count = 0;
+
+    while (count <= step && currentPos != -1) {
+        QString cityName = QString::fromStdString(pathCities[count]);
+        currentPos = resultText.indexOf(cityName, startPos);
+
+        if (currentPos != -1) {
+            startPos = currentPos + cityName.length();
+            count++;
+        }
+    }
+
+    if (currentPos != -1) {
+        // Select the text of the current city
+        QTextCursor cursor = ui->pathResultsTextEdit->textCursor();
+        cursor.setPosition(currentPos);
+        cursor.setPosition(currentPos + QString::fromStdString(pathCities[step]).length(), QTextCursor::KeepAnchor);
+        ui->pathResultsTextEdit->setTextCursor(cursor);
+    }
+}
+
 void ShortestPathWindow::on_sourceCityComboBox_currentIndexChanged(int index)
 {
-    // Enable Find Path button if both source and destination are selected
     ui->btnFindPath->setEnabled(index >= 0 && ui->destCityComboBox->currentIndex() >= 0);
 }
 
 void ShortestPathWindow::on_destCityComboBox_currentIndexChanged(int index)
 {
-    // Enable Find Path button if both source and destination are selected
     ui->btnFindPath->setEnabled(index >= 0 && ui->sourceCityComboBox->currentIndex() >= 0);
 }

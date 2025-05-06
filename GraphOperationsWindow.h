@@ -16,9 +16,11 @@ class GraphOperationsWindow : public QDialog
 public:
     explicit GraphOperationsWindow(Graph* graph, QWidget *parent = nullptr);
     ~GraphOperationsWindow();
+
+    // Update the city list (Handle Graph Modification)
     void refreshCityList();
 
-private slots:
+private slots: // slots => functions that can be connected to signals, like button clicks
     void on_btnAddCity_clicked();
     void on_btnDeleteCity_clicked();
     void on_btnAddRoad_clicked();
@@ -30,7 +32,9 @@ private:
     Graph* graph;
     QStringListModel* cityListModel;
     QStringList cityList;
+
+    // Update the city list model
     void updateCityList();
 };
 
-#endif // GRAPHOPERATIONSWINDOW_H
+#endif

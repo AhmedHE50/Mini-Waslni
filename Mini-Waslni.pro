@@ -15,7 +15,10 @@ SOURCES += \
     GraphTraversalWindow.cpp \
     MainWindow.cpp \
     ShortestPathWindow.cpp \
-    main.cpp
+    citypositiondialog.cpp \
+    main.cpp \
+    mapvisualization.cpp \
+    mapwindow.cpp
 
 # Header files
 HEADERS += \
@@ -25,13 +28,18 @@ HEADERS += \
     GraphTraversalWindow.h \
     MainWindow.h \
     ShortestPathWindow.h \
-    json.hpp
+    citypositiondialog.h \
+    json.hpp \
+    mapvisualization.h \
+    mapwindow.h
 
 FORMS += \
     GraphOperationsWindow.ui \
     GraphTraversalWindow.ui \
     MainWindow.ui \
-    ShortestPathWindow.ui
+    ShortestPathWindow.ui \
+    citypositiondialog.ui \
+    mapwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

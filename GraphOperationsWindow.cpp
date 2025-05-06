@@ -1,4 +1,5 @@
 #include "graphoperationswindow.h"
+#include "MapVisualization.h"
 #include "ui_graphoperationswindow.h"
 #include <QMessageBox>
 
@@ -8,7 +9,7 @@ GraphOperationsWindow::GraphOperationsWindow(Graph* graph, QWidget *parent) :
     graph(graph)
 {
     ui->setupUi(this);
-    setWindowTitle("Manage Cities and Roads");
+    setWindowTitle("Graph Operations");
 
     // Initialize city list model
     cityListModel = new QStringListModel(this);
@@ -16,11 +17,12 @@ GraphOperationsWindow::GraphOperationsWindow(Graph* graph, QWidget *parent) :
     // Update city list
     updateCityList();
 
-    // Setup combo boxes
+    // Setup combo boxes and list view with the city list model
     ui->fromCityComboBox->setModel(cityListModel);
     ui->toCityComboBox->setModel(cityListModel);
     ui->cityListBox->setModel(cityListModel);
 
+    //  Styling the window (similar to CSS)
     setStyleSheet(R"(
         QDialog {
             background-color: #f0f0f0;
@@ -57,8 +59,9 @@ void GraphOperationsWindow::updateCityList()
     cityList.clear();
     const CityGraph& cities = graph->getAllCities();
 
+    // Iterate through the cities and add them to the list
     for (auto it = cities.begin(); it != cities.end(); ++it) {
-        cityList.append(QString::fromStdString(it->first));
+        cityList.append(QString::fromStdString(it->first)); // city names <==> keys
     }
 
     cityList.sort();
@@ -72,7 +75,7 @@ void GraphOperationsWindow::refreshCityList()
 
 void GraphOperationsWindow::on_btnAddCity_clicked()
 {
-    QString cityName = ui->cityNameLineEdit->text().trimmed();
+    QString cityName = ui->cityNameLineEdit->text().trimmed(); // Get city name from input, remove extra spaces
 
     if (cityName.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Please enter a city name.");
@@ -81,6 +84,14 @@ void GraphOperationsWindow::on_btnAddCity_clicked()
 
     // Add city to graph
     graph->addCity(cityName.toStdString());
+
+    // Show position dialog to set the position of the new city
+    MapVisualization* mapVis = dynamic_cast<MapVisualization*>(
+        parent()->findChild<MapVisualization*>());
+
+    if (mapVis) {
+        mapVis->showCityPositionDialog(cityName);
+    }
 
     // Update city list
     updateCityList();
@@ -94,7 +105,8 @@ void GraphOperationsWindow::on_btnAddCity_clicked()
 
 void GraphOperationsWindow::on_btnDeleteCity_clicked()
 {
-    int index = ui->cityListBox->currentIndex();
+    int index = ui->cityListBox->currentIndex(); // Get the index of the selected city
+
     if (index < 0 || index >= cityList.size()) {
         QMessageBox::warning(this, "Selection Error", "Please select a city to delete.");
         return;
@@ -136,7 +148,7 @@ void GraphOperationsWindow::on_btnAddRoad_clicked()
     }
 
     bool ok;
-    double distance = ui->distanceLineEdit->text().toDouble(&ok);
+    double distance = ui->distanceLineEdit->text().toDouble(&ok); // Get distance, convert to double
 
     if (!ok || distance <= 0) {
         QMessageBox::warning(this, "Input Error", "Please enter a valid positive distance.");

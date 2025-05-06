@@ -4,8 +4,14 @@ release/GraphOperationsWindow.o
 release/GraphTraversalWindow.o
 release/MainWindow.o
 release/ShortestPathWindow.o
+release/citypositiondialog.o
 release/main.o
+release/mapvisualization.o
+release/mapwindow.o
 release/moc_GraphOperationsWindow.o
 release/moc_GraphTraversalWindow.o
 release/moc_MainWindow.o
 release/moc_ShortestPathWindow.o
+release/moc_citypositiondialog.o
+release/moc_mapvisualization.o
+release/moc_mapwindow.o
