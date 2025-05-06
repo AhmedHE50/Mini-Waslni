@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QTimer>
 #include <QDebug>
+#include <unordered_map>
+#include <queue>
 
 ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidget *parent) :
     QDialog(parent),
@@ -19,6 +21,7 @@ ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidg
     cityListModel = new QStringListModel(this);
 
     updateCityList();
+    updateAlgorithmList();
 
     ui->sourceCityComboBox->setModel(cityListModel);
     ui->destCityComboBox->setModel(cityListModel);
@@ -45,7 +48,6 @@ ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidg
     if (mapWindow) {
         setMapWindow(mapWindow);
     }
-
 }
 
 ShortestPathWindow::~ShortestPathWindow()
@@ -75,6 +77,14 @@ void ShortestPathWindow::updateCityList()
     cityListModel->setStringList(cityList);
 }
 
+void ShortestPathWindow::updateAlgorithmList()
+{
+    QStringList algorithms;
+    algorithms << "Dijkstra" << "Kruskal MST";
+    ui->algorithmComboBox->clear();
+    ui->algorithmComboBox->addItems(algorithms);
+}
+
 void ShortestPathWindow::refreshCityList()
 {
     updateCityList();
@@ -101,11 +111,14 @@ void ShortestPathWindow::on_btnFindPath_clicked()
     currentSource = sourceCity.toStdString();
     currentDestination = destCity.toStdString();
 
-    // Run Dijkstra's algorithm
-    shortestPaths = graph->Dijkstra(currentSource);
+    // Determine which algorithm to use
+    int algorithmIndex = ui->algorithmComboBox->currentIndex();
 
-    // Display the shortest path
-    displayPath(currentDestination);
+    if (algorithmIndex == DIJKSTRA) {
+        runDijkstra();
+    } else if (algorithmIndex == KRUSKAL_MST) {
+        runKruskalMST();
+    }
 
     // Start visual animation
     if (mapWindow) {
@@ -123,8 +136,6 @@ void ShortestPathWindow::on_btnFindPath_clicked()
             QMessageBox::warning(this, "Visualization Error", "Cannot show path visualization - map component is missing.");
         }
     } else {
-        QMessageBox::information(this, "Visualization", "Path found but no map window is available for visualization.");
-
         // Create a new map window if it doesn't exist
         mapWindow = new MapWindow(graph, this);
         mapWindow->show();
@@ -143,6 +154,200 @@ void ShortestPathWindow::on_btnFindPath_clicked()
     }
 }
 
+void ShortestPathWindow::runDijkstra()
+{
+    // Run Dijkstra's algorithm
+    shortestPaths = graph->Dijkstra(currentSource);
+
+    // Display the shortest path
+    displayPath(currentDestination);
+}
+
+void ShortestPathWindow::runKruskalMST()
+{
+    // Get all cities for creating MST graph
+    CityGraph cities = graph->getAllCities();
+
+    // Helper function to extract edges for Kruskal's MST
+    map<double, vector<pair<string, string>>> sortedEdges = graph->roadExtract(cities);
+
+    // Create a set to store unique cities
+    set<string> uniqueCities;
+    for (auto it = cities.begin(); it != cities.end(); ++it) {
+        string city = it->first;
+        uniqueCities.insert(city);
+
+        list<pair<string, double>>& neighbors = it->second;
+        for (auto neighborIt = neighbors.begin(); neighborIt != neighbors.end(); ++neighborIt) {
+            string neighbor = neighborIt->first;
+            uniqueCities.insert(neighbor);
+        }
+    }
+    int cityCount = uniqueCities.size();
+
+    // Reset the MST paths
+    mstPaths.clear();
+
+    // Create a graph for MST
+    unordered_map<string, vector<string>> mstGraph;
+
+    // Initialize the graph with only nodes
+    for (const string& city : uniqueCities) {
+        mstGraph[city] = vector<string>();
+    }
+
+    // Iterate through edges in ascending order by weight
+    for (auto edgeIt = sortedEdges.begin(); edgeIt != sortedEdges.end(); ++edgeIt) {
+        double weight = edgeIt->first;
+        vector<pair<string, string>>& edgeList = edgeIt->second;
+
+        for (const auto& edge : edgeList) {
+            string u = edge.first;
+            string v = edge.second;
+
+            // Simulate adding edge
+            mstGraph[u].push_back(v);
+            mstGraph[v].push_back(u);
+
+            // Check for cycles
+            unordered_map<string, bool> visited;
+            bool cycleFound = false;
+
+            for (const string& city : uniqueCities) {
+                visited[city] = false;
+            }
+
+            if (graph->hasCycle(mstGraph, u, visited, "")) {
+                cycleFound = true;
+            }
+
+            if (cycleFound) {
+                // Remove edge if it creates a cycle
+                vector<string>& uNeighbors = mstGraph[u];
+                auto newEndU = remove(uNeighbors.begin(), uNeighbors.end(), v);
+                uNeighbors.erase(newEndU, uNeighbors.end());
+
+                vector<string>& vNeighbors = mstGraph[v];
+                auto newEndV = remove(vNeighbors.begin(), vNeighbors.end(), u);
+                vNeighbors.erase(newEndV, vNeighbors.end());
+            } else {
+                // Add edge to MST
+                mstPaths.push_back(make_pair(make_pair(u, v), weight));
+
+                // If we have n-1 edges, MST is complete
+                if (mstPaths.size() == cityCount - 1) {
+                    break;
+                }
+            }
+        }
+
+        // If MST is complete, break out of the loop
+        if (mstPaths.size() == cityCount - 1) {
+            break;
+        }
+    }
+
+    // Find path in MST from source to destination
+    pathCities = findPathInMST(currentSource, currentDestination);
+
+    // Display MST path
+    displayMSTPath();
+}
+
+vector<string> ShortestPathWindow::findPathInMST(const string& start, const string& end)
+{
+    // Create an adjacency list from MST edges
+    unordered_map<string, vector<string>> mstAdjList;
+    for (const auto& edge : mstPaths) {
+        string u = edge.first.first;
+        string v = edge.first.second;
+        mstAdjList[u].push_back(v);
+        mstAdjList[v].push_back(u);
+    }
+
+    // BFS to find the path
+    queue<string> q;
+    unordered_map<string, bool> visited;
+    unordered_map<string, string> parent;
+
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty()) {
+        string current = q.front();
+        q.pop();
+
+        if (current == end) {
+            break;
+        }
+
+        for (const string& neighbor : mstAdjList[current]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                parent[neighbor] = current;
+                q.push(neighbor);
+            }
+        }
+    }
+
+    // Reconstruct the path
+    vector<string> path;
+    string current = end;
+
+    if (parent.find(end) != parent.end() || start == end) {
+        while (current != start) {
+            path.push_back(current);
+            current = parent[current];
+        }
+        path.push_back(start);
+        reverse(path.begin(), path.end());
+    }
+
+    return path;
+}
+
+void ShortestPathWindow::displayMSTPath()
+{
+    if (pathCities.empty()) {
+        ui->pathResultsTextEdit->setText("No path found from " +
+                                         QString::fromStdString(currentSource) + " to " +
+                                         QString::fromStdString(currentDestination) + " in the MST.");
+        return;
+    }
+
+    // Calculate total distance of the path
+    double totalDistance = 0.0;
+    for (size_t i = 0; i < pathCities.size() - 1; ++i) {
+        for (const auto& edge : mstPaths) {
+            string u = edge.first.first;
+            string v = edge.first.second;
+            double weight = edge.second;
+
+            if ((u == pathCities[i] && v == pathCities[i+1]) ||
+                (u == pathCities[i+1] && v == pathCities[i])) {
+                totalDistance += weight;
+                break;
+            }
+        }
+    }
+
+    QString result = "Shortest Path (MST) from " + QString::fromStdString(currentSource) +
+                     " to " + QString::fromStdString(currentDestination) + ":\n\n";
+
+    // Display the path
+    for (size_t i = 0; i < pathCities.size(); ++i) {
+        result += QString::fromStdString(pathCities[i]);
+
+        if (i < pathCities.size() - 1) {
+            result += " → ";
+        }
+    }
+
+    result += "\n\nTotal Distance: " + QString::number(totalDistance) + " km";
+
+    ui->pathResultsTextEdit->setText(result);
+}
+
 void ShortestPathWindow::displayPath(const std::string& destination)
 {
     if (shortestPaths.find(destination) == shortestPaths.end()) {
@@ -157,7 +362,7 @@ void ShortestPathWindow::displayPath(const std::string& destination)
     // Reconstruct the path
     pathCities = reconstructPath(currentSource, destination);
 
-    QString result = "Shortest Path from " + QString::fromStdString(currentSource) +
+    QString result = "Shortest Path (Dijkstra) from " + QString::fromStdString(currentSource) +
                      " to " + QString::fromStdString(destination) + ":\n\n";
 
     // Display the path
@@ -209,7 +414,7 @@ void ShortestPathWindow::startPathVisualization()
     ui->btnFindPath->setEnabled(false);
 
     // Start the animation timer
-    pathAnimationTimer->setInterval(500);
+    pathAnimationTimer->setInterval(100);
     pathAnimationTimer->start();
 }
 

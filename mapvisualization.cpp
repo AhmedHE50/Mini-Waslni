@@ -496,20 +496,45 @@ void MapVisualization::drawRoad(QPainter& painter, const QPointF& from, const QP
 
 bool MapVisualization::isEdgeInPath(const QString& fromCity, const QString& toCity) const
 {
-    // Check if this edge (in either direction) is part of the current traversal path
-    if (currentPath.isEmpty() || currentPath.size() % 2 != 0) {
-        return false;
+    // First check the explicit edge list in currentPath (original implementation)
+    if (!currentPath.isEmpty() && currentPath.size() % 2 == 0) {
+        // Check every pair of cities in the path
+        for (int i = 0; i < currentPath.size() - 1; i += 2) {
+            QString pathFrom = currentPath[i];
+            QString pathTo = currentPath[i + 1];
+
+            // Check both directions since the edge is undirected
+            if ((pathFrom == fromCity && pathTo == toCity) ||
+                (pathFrom == toCity && pathTo == fromCity)) {
+                return true;
+            }
+        }
     }
 
-    // Check every pair of cities in the path
-    for (int i = 0; i < currentPath.size() - 1; i += 2) {
-        QString pathFrom = currentPath[i];
-        QString pathTo = currentPath[i + 1];
+    if (visitedCities.contains(fromCity) && visitedCities.contains(toCity)) {
+        // Check if these cities are connected in the graph
+        const CityGraph& cities = graph->getAllCities();
 
-        // Check both directions since the edge is undirected
-        if ((pathFrom == fromCity && pathTo == toCity) ||
-            (pathFrom == toCity && pathTo == fromCity)) {
-            return true;
+        // Check if fromCity has toCity as a neighbor
+        auto fromIter = cities.find(fromCity.toStdString());
+        if (fromIter != cities.end()) {
+            const auto& neighbors = fromIter->second;
+            for (const auto& neighbor : neighbors) {
+                if (neighbor.first == toCity.toStdString()) {
+                    return true;
+                }
+            }
+        }
+
+        // Check if toCity has fromCity as a neighbor
+        auto toIter = cities.find(toCity.toStdString());
+        if (toIter != cities.end()) {
+            const auto& neighbors = toIter->second;
+            for (const auto& neighbor : neighbors) {
+                if (neighbor.first == fromCity.toStdString()) {
+                    return true;
+                }
+            }
         }
     }
 

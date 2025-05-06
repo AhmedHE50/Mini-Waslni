@@ -86,9 +86,22 @@ void GraphTraversalWindow::on_btnBFS_clicked() {
     displayTraversalResult(bfsResult); // Display the BFS result
 
     if (mapWindow) {
+        if (!mapWindow->isVisible()) {
+            mapWindow->show();
+        }
+        mapWindow->raise();
+        mapWindow->activateWindow();
+        startTraversalVisualization(bfsResult);
+    } else {
+        // Create a new map window if it doesn't exist
+        mapWindow = new MapWindow(graph, this);
         mapWindow->show();
-        mapWindow->raise();          // Bring it to the front
-        mapWindow->activateWindow(); // Give it focus
+
+        // Update the reference and try again
+        this->setMapWindow(mapWindow);
+
+        mapWindow->raise();
+        mapWindow->activateWindow();
         startTraversalVisualization(bfsResult);
     }
 }
@@ -106,7 +119,20 @@ void GraphTraversalWindow::on_btnDFS_clicked() {
     displayTraversalResult(dfsResult);
 
     if (mapWindow) {
+        if (!mapWindow->isVisible()) {
+            mapWindow->show();
+        }
+        mapWindow->raise();
+        mapWindow->activateWindow();
+        startTraversalVisualization(dfsResult);
+    } else {
+        // Create a new map window if it doesn't exist
+        mapWindow = new MapWindow(graph, this);
         mapWindow->show();
+
+        // Update the reference and try again
+        this->setMapWindow(mapWindow);
+
         mapWindow->raise();
         mapWindow->activateWindow();
         startTraversalVisualization(dfsResult);
@@ -132,7 +158,7 @@ void GraphTraversalWindow::startTraversalVisualization(const std::vector<std::st
     currentTraversalPath = path;
     currentTraversalStep = 0;
     resetVisualization();
-    traversalTimer->setInterval(500); // Set a fixed animation speed
+    traversalTimer->setInterval(100); // Set a fixed animation speed
     traversalTimer->start();
     ui->btnBFS->setEnabled(false);
     ui->btnDFS->setEnabled(false);

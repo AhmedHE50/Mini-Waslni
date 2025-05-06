@@ -35,13 +35,16 @@ private:
     QStringListModel* cityListModel;
     QStringList cityList;
     std::map<std::string, std::pair<double, std::string>> shortestPaths;
+    std::vector<std::pair<std::pair<std::string, std::string>, double>> mstPaths;
     std::string currentSource;
     std::string currentDestination;
     std::vector<std::string> pathCities;
     int currentPathStep;
     QTimer* pathAnimationTimer;
+    enum AlgorithmType { DIJKSTRA, KRUSKAL_MST };
 
     void updateCityList();
+    void updateAlgorithmList();
 
     // Traversal Visualization
     void displayPath(const std::string& destination); // Text
@@ -49,6 +52,12 @@ private:
     void startPathVisualization(); // Animation
     void resetVisualization();
     void highlightPathText(int step);
+
+    // Algorithm-specific functions
+    void runDijkstra();
+    void runKruskalMST();
+    void displayMSTPath();
+    std::vector<std::string> findPathInMST(const std::string& start, const std::string& end);
 };
 
 #endif

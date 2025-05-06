@@ -4,22 +4,31 @@
 #include <list>
 #include <stack>
 #include <map>
-#include <set>
 #include <vector>
+#include <set>
 #include <limits>
+#include <algorithm> // Include algorithm for std::remove
+
+// Define the graph type to easily written
+typedef unordered_map<string, list<pair<string, double>>> CityGraph;
+/*
+* First string -> cityName
+* list -> contains all the city neighbors
+* each neighbor -> cityName and distance bet. them
+*/
 
 CityGraph& Graph::getAllCities() {
-    return cities; // Return a modifiable reference
+    return cities;
 }
 
 const CityGraph& Graph::getAllCities() const {
-    return cities; // Return a const (read-only) reference
+    return cities;
 }
 
-// Add a city to the graph
+
 void Graph::addCity(const string& cityName) {
     if (cities.find(cityName) == cities.end()) {
-        cities[cityName] = {}; // Add the city with an empty list of neighbors
+        cities[cityName] = {}; // Add the city with empty list
         cout << "City '" << cityName << "' added successfully." << endl;
     }
     else {
@@ -27,7 +36,6 @@ void Graph::addCity(const string& cityName) {
     }
 }
 
-// Add a road (edge) between two cities
 void Graph::addRoad(const string& fromCity, const string& toCity, double dist) {
     if (cities.find(fromCity) == cities.end() || cities.find(toCity) == cities.end()) {
         cout << "One or both cities do not exist." << endl;
@@ -41,23 +49,23 @@ void Graph::addRoad(const string& fromCity, const string& toCity, double dist) {
     cout << "Road added between '" << fromCity << "' and '" << toCity << "' with distance " << dist << "." << endl;
 }
 
-// Delete a city and all connected roads
 void Graph::deleteCity(const string& cityName) {
     if (cities.find(cityName) != cities.end()) {
-        cities.erase(cityName); // Remove the city from the graph
+        // Remove the city from the graph
+        cities.erase(cityName);
         cout << "City '" << cityName << "' deleted successfully." << endl;
 
-        // Remove roads connected to the deleted city
+        // Remove all roads pointing to the deleted city
         for (auto it = cities.begin(); it != cities.end(); ++it) {
             auto& roads = it->second;
 
             auto roadIt = roads.begin();
             while (roadIt != roads.end()) {
                 if (roadIt->first == cityName) {
-                    roadIt = roads.erase(roadIt);
+                    roadIt = roads.erase(roadIt); // Erase the road and move to the next
                 }
                 else {
-                    ++roadIt;
+                    ++roadIt; // Move to the next road
                 }
             }
         }
@@ -69,40 +77,40 @@ void Graph::deleteCity(const string& cityName) {
     }
 }
 
-// Delete a specific road between two cities
 void Graph::deleteRoad(const string& fromCity, const string& toCity) {
+    // Ensure both cities exist
     if (cities.find(fromCity) == cities.end() || cities.find(toCity) == cities.end()) {
         cout << "One or both cities do not exist." << endl;
         return;
     }
 
-    // Remove road from fromCity to toCity
+    // Delete the road from fromCity -> toCity
     auto& roads1 = cities.at(fromCity);
     auto roadIt1 = roads1.begin();
     bool found1 = false;
     while (roadIt1 != roads1.end()) {
         if (roadIt1->first == toCity) {
-            roadIt1 = roads1.erase(roadIt1);
+            roadIt1 = roads1.erase(roadIt1); // Erase the road and move to the next
             found1 = true;
-            break;
+            break; // Exit the loop once the road is found and deleted
         }
         else {
-            ++roadIt1;
+            ++roadIt1; // Move to the next road
         }
     }
 
-    // Remove the reverse road from toCity to fromCity
+    // Delete the reverse road from toCity -> fromCity
     auto& roads2 = cities.at(toCity);
     auto roadIt2 = roads2.begin();
     bool found2 = false;
     while (roadIt2 != roads2.end()) {
         if (roadIt2->first == fromCity) {
-            roadIt2 = roads2.erase(roadIt2);
+            roadIt2 = roads2.erase(roadIt2); // Erase the road and move to the next
             found2 = true;
-            break;
+            break; // Exit the loop once the road is found and deleted
         }
         else {
-            ++roadIt2;
+            ++roadIt2; // Move to the next road
         }
     }
 
@@ -116,7 +124,7 @@ void Graph::deleteRoad(const string& fromCity, const string& toCity) {
 
 vector<string> Graph::BFS(const string& cityName) {
     unordered_map<string, bool> visited;
-    vector<string> bfsOrder;
+    vector<string> bfsOrder;  // Keep track of the BFS order lvl by lvl "I'm sorry H & Azad for modifying y'all code"
     queue<string> q;
 
     q.push(cityName);
@@ -140,7 +148,7 @@ vector<string> Graph::BFS(const string& cityName) {
 
 vector<string> Graph::DFS(const string& start) {
     unordered_map<string, bool> visited;
-    vector<string> dfsOrder;
+    vector<string> dfsOrder;  // Keep track for DFS traverse order
     stack<string> s;
 
     s.push(start);
@@ -166,13 +174,15 @@ vector<string> Graph::DFS(const string& start) {
 
 map<string, pair<double, string>> Graph::Dijkstra(const string& source)
 {
+    // key: the city || pair<int, string> int: distance from source, string: city where i came from
     map<string, pair<double, string>> shortestPathsFromTheSource;
     if (cities.find(source) != cities.end())
     {
+        // int : distance from the source, string: the city of this distance
         priority_queue<pair<double, string>, vector<pair<double, string>>, greater<pair<double, string>>> pq;
         unordered_map<string, double> distToCities;
         unordered_map<string, bool> Visited;
-
+        // collecting keys and initialising it
         for (auto it : cities)
         {
             distToCities.insert({ it.first, numeric_limits<double>::max() });
@@ -203,8 +213,8 @@ map<string, pair<double, string>> Graph::Dijkstra(const string& source)
 
 map<double, vector<pair<string, string>>> Graph::roadExtract(CityGraph& cities)
 {
-    map<double, vector< pair<string, string>>> roads;
-    set<pair<string, string>> uniqueRoads;
+    map<double, vector< pair<string, string>>> roads;//container to hold all edges
+    set<pair<string, string>> uniqueRoads; //count each road only one time
     for (auto it = cities.begin(); it != cities.end(); ++it) {
         string city = it->first;
         list<pair<string, double>>& neighbors = it->second;
@@ -225,6 +235,7 @@ map<double, vector<pair<string, string>>> Graph::roadExtract(CityGraph& cities)
 bool Graph::hasCycle(unordered_map<string, vector<string>>& graph, const string& current, unordered_map<string, bool>& visited, const string& parent) {
 
     visited[current] = true;
+    //basic cycle detection
     for (const string& neighbor : graph.at(current)) {
         if (!visited[neighbor]) {
             if (hasCycle(graph, neighbor, visited, current))
@@ -239,8 +250,9 @@ bool Graph::hasCycle(unordered_map<string, vector<string>>& graph, const string&
 }
 
 void Graph::kruskalMST(CityGraph& cities) {
-    map<double, vector<pair<string, string>>> sortedEdges = roadExtract(cities);
-    set<string> uniqueCities;
+
+    map<double, vector<pair<string, string>>> sortedEdges = roadExtract(cities); //container to hold all roads
+    set<string> uniqueCities; //count total number of nodes
 
     for (auto it = cities.begin(); it != cities.end(); ++it) {
         string city = it->first;
@@ -254,8 +266,8 @@ void Graph::kruskalMST(CityGraph& cities) {
     }
     int cityCount = uniqueCities.size();
 
-    vector<pair<pair<string, string>, double>> mst;
-    unordered_map<string, vector<string>> mstGraph;
+    vector<pair<pair<string, string>, double>> mst; //store mimimum spanning tree edges
+    unordered_map<string, vector<string>> mstGraph; //empty graph for mst
 
     //initial graph with only nodes
     for (set<string>::iterator cityIt = uniqueCities.begin(); cityIt != uniqueCities.end(); ++cityIt) {
@@ -273,21 +285,23 @@ void Graph::kruskalMST(CityGraph& cities) {
             string u = edgeList[i].first;
             string v = edgeList[i].second;
 
+            //simulate add
             mstGraph[u].push_back(v);
             mstGraph[v].push_back(u);
 
+            //check for cycles
             unordered_map<string, bool> visited;
             bool cycleFound = false;
 
-            for (set<string>::iterator cityIt = uniqueCities.begin(); cityIt != uniqueCities.end(); ++cityIt) {
+            for (set<string>::iterator cityIt = uniqueCities.begin(); cityIt != uniqueCities.end(); ++cityIt) { //vis[]={} initial
                 visited[*cityIt] = false;
             }
 
-            if (hasCycle(mstGraph, u, visited, "")) {
+            if (hasCycle(mstGraph, u, visited, "")) { //detect cycle
                 cycleFound = true;
             }
 
-            if (cycleFound) {
+            if (cycleFound) { //remove edge
 
                 vector<string>& uNeighbors = mstGraph[u];
                 auto newEndU = std::remove(uNeighbors.begin(), uNeighbors.end(), v);
@@ -298,9 +312,10 @@ void Graph::kruskalMST(CityGraph& cities) {
                 vNeighbors.erase(newEndV, vNeighbors.end());
             }
             else {
-                mst.push_back(make_pair(make_pair(u, v), weight));
+                mst.push_back(make_pair(make_pair(u, v), weight)); //add edge
 
-                if (static_cast<long long>(mst.size()) == cityCount - 1) {
+                // Corrected comparison: cast mst.size() to long long
+                if (static_cast<long long>(mst.size()) == cityCount - 1) { //process is complete after reaching n-1 edges
 
                     cout << "Minimum Spanning Tree:" << endl;
                     double totalWeight = 0.0;
