@@ -509,32 +509,21 @@ bool MapVisualization::isEdgeInPath(const QString& fromCity, const QString& toCi
                 return true;
             }
         }
+
+        // If currentPath is specified, only use that to determine edges
+        // and don't fall through to the visitedCities check
+        return false;
     }
 
+    // Only if no explicit path is provided, check if these cities are consecutive in visitedCities
     if (visitedCities.contains(fromCity) && visitedCities.contains(toCity)) {
-        // Check if these cities are connected in the graph
-        const CityGraph& cities = graph->getAllCities();
+        // Check if they are consecutive in the visitedCities list
+        int fromIndex = visitedCities.indexOf(fromCity);
+        int toIndex = visitedCities.indexOf(toCity);
 
-        // Check if fromCity has toCity as a neighbor
-        auto fromIter = cities.find(fromCity.toStdString());
-        if (fromIter != cities.end()) {
-            const auto& neighbors = fromIter->second;
-            for (const auto& neighbor : neighbors) {
-                if (neighbor.first == toCity.toStdString()) {
-                    return true;
-                }
-            }
-        }
-
-        // Check if toCity has fromCity as a neighbor
-        auto toIter = cities.find(toCity.toStdString());
-        if (toIter != cities.end()) {
-            const auto& neighbors = toIter->second;
-            for (const auto& neighbor : neighbors) {
-                if (neighbor.first == fromCity.toStdString()) {
-                    return true;
-                }
-            }
+        // If they are adjacent in the path (abs difference of 1)
+        if (abs(fromIndex - toIndex) == 1) {
+            return true;
         }
     }
 
