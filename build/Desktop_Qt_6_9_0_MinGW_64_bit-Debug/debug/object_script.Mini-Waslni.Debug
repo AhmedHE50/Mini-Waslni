@@ -1,0 +1,17 @@
+debug/FileManager.o
+debug/Graph.o
+debug/GraphOperationsWindow.o
+debug/GraphTraversalWindow.o
+debug/MainWindow.o
+debug/ShortestPathWindow.o
+debug/citypositiondialog.o
+debug/main.o
+debug/mapvisualization.o
+debug/mapwindow.o
+debug/moc_GraphOperationsWindow.o
+debug/moc_GraphTraversalWindow.o
+debug/moc_MainWindow.o
+debug/moc_ShortestPathWindow.o
+debug/moc_citypositiondialog.o
+debug/moc_mapvisualization.o
+debug/moc_mapwindow.o

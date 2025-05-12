@@ -1,0 +1,372 @@
+{
+    "Alexandria": [
+        {
+            "distance": 220.0,
+            "neighbor": "Beheira"
+        },
+        {
+            "distance": 177.0,
+            "neighbor": "Kafr El Sheikh"
+        },
+        {
+            "distance": 100.0,
+            "neighbor": "Matrouh"
+        }
+    ],
+    "Aswan": [
+        {
+            "distance": 230.0,
+            "neighbor": "Luxor"
+        },
+        {
+            "distance": 289.0,
+            "neighbor": "Red Sea"
+        }
+    ],
+    "Asyut": [
+        {
+            "distance": 134.0,
+            "neighbor": "Sohag"
+        },
+        {
+            "distance": 164.0,
+            "neighbor": "Minya"
+        },
+        {
+            "distance": 223.0,
+            "neighbor": "New Valley"
+        }
+    ],
+    "Beheira": [
+        {
+            "distance": 220.0,
+            "neighbor": "Alexandria"
+        },
+        {
+            "distance": 149.0,
+            "neighbor": "Kafr El Sheikh"
+        },
+        {
+            "distance": 130.0,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 170.0,
+            "neighbor": "Matrouh"
+        }
+    ],
+    "Beni Suef": [
+        {
+            "distance": 119.0,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 124.0,
+            "neighbor": "Faiyum"
+        },
+        {
+            "distance": 87.0,
+            "neighbor": "Minya"
+        }
+    ],
+    "Cairo": [
+        {
+            "distance": 17.0,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 80.0,
+            "neighbor": "Qalyubia"
+        },
+        {
+            "distance": 127.0,
+            "neighbor": "Sharqia"
+        },
+        {
+            "distance": 116.0,
+            "neighbor": "Suez"
+        }
+    ],
+    "Dakahlia": [
+        {
+            "distance": 125.0,
+            "neighbor": "Damietta"
+        },
+        {
+            "distance": 53.0,
+            "neighbor": "Kafr El Sheikh"
+        },
+        {
+            "distance": 111.0,
+            "neighbor": "Sharqia"
+        },
+        {
+            "distance": 151.0,
+            "neighbor": "Port Said"
+        }
+    ],
+    "Damietta": [
+        {
+            "distance": 125.0,
+            "neighbor": "Dakahlia"
+        },
+        {
+            "distance": 164.0,
+            "neighbor": "Port Said"
+        }
+    ],
+    "Faiyum": [
+        {
+            "distance": 103.0,
+            "neighbor": "Giza"
+        },
+        {
+            "distance": 124.0,
+            "neighbor": "Beni Suef"
+        },
+        {
+            "distance": 320.0,
+            "neighbor": "New Valley"
+        }
+    ],
+    "Gharbia": [
+        {
+            "distance": 50.0,
+            "neighbor": "Monufia"
+        },
+        {
+            "distance": 62.0,
+            "neighbor": "Kafr El Sheikh"
+        },
+        {
+            "distance": 111.0,
+            "neighbor": "Dakahlia"
+        }
+    ],
+    "Giza": [
+        {
+            "distance": 17.0,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 103.0,
+            "neighbor": "Faiyum"
+        },
+        {
+            "distance": 119.0,
+            "neighbor": "Beni Suef"
+        },
+        {
+            "distance": 130.0,
+            "neighbor": "Beheira"
+        }
+    ],
+    "Ismailia": [
+        {
+            "distance": 83.0,
+            "neighbor": "Port Said"
+        },
+        {
+            "distance": 65.0,
+            "neighbor": "Suez"
+        },
+        {
+            "distance": 86.0,
+            "neighbor": "North Sinai"
+        }
+    ],
+    "Kafr El Sheikh": [
+        {
+            "distance": 177.0,
+            "neighbor": "Alexandria"
+        },
+        {
+            "distance": 149.0,
+            "neighbor": "Beheira"
+        },
+        {
+            "distance": 62.0,
+            "neighbor": "Gharbia"
+        },
+        {
+            "distance": 53.0,
+            "neighbor": "Dakahlia"
+        }
+    ],
+    "Luxor": [
+        {
+            "distance": 230.0,
+            "neighbor": "Aswan"
+        },
+        {
+            "distance": 109.0,
+            "neighbor": "Qena"
+        }
+    ],
+    "Matrouh": [
+        {
+            "distance": 170.0,
+            "neighbor": "Beheira"
+        },
+        {
+            "distance": 440.0,
+            "neighbor": "New Valley"
+        },
+        {
+            "distance": 211.0,
+            "neighbor": "Alexandria"
+        }
+    ],
+    "Minya": [
+        {
+            "distance": 87.0,
+            "neighbor": "Beni Suef"
+        },
+        {
+            "distance": 164.0,
+            "neighbor": "Asyut"
+        }
+    ],
+    "Monufia": [
+        {
+            "distance": 50.0,
+            "neighbor": "Gharbia"
+        },
+        {
+            "distance": 80.0,
+            "neighbor": "Qalyubia"
+        }
+    ],
+    "New Valley": [
+        {
+            "distance": 223.0,
+            "neighbor": "Asyut"
+        },
+        {
+            "distance": 320.0,
+            "neighbor": "Faiyum"
+        },
+        {
+            "distance": 440.0,
+            "neighbor": "Matrouh"
+        }
+    ],
+    "North Sinai": [
+        {
+            "distance": 86.0,
+            "neighbor": "Ismailia"
+        },
+        {
+            "distance": 129.0,
+            "neighbor": "South Sinai"
+        }
+    ],
+    "Port Said": [
+        {
+            "distance": 164.0,
+            "neighbor": "Damietta"
+        },
+        {
+            "distance": 151.0,
+            "neighbor": "Dakahlia"
+        },
+        {
+            "distance": 83.0,
+            "neighbor": "Ismailia"
+        }
+    ],
+    "Qalyubia": [
+        {
+            "distance": 80.0,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 80.0,
+            "neighbor": "Monufia"
+        },
+        {
+            "distance": 107.0,
+            "neighbor": "Sharqia"
+        }
+    ],
+    "Qena": [
+        {
+            "distance": 109.0,
+            "neighbor": "Luxor"
+        },
+        {
+            "distance": 160.0,
+            "neighbor": "Sohag"
+        },
+        {
+            "distance": 219.0,
+            "neighbor": "Red Sea"
+        }
+    ],
+    "Red Sea": [
+        {
+            "distance": 289.0,
+            "neighbor": "Aswan"
+        },
+        {
+            "distance": 219.0,
+            "neighbor": "Qena"
+        },
+        {
+            "distance": 260.0,
+            "neighbor": "Suez"
+        },
+        {
+            "distance": 183.0,
+            "neighbor": "South Sinai"
+        }
+    ],
+    "Sharqia": [
+        {
+            "distance": 107.0,
+            "neighbor": "Qalyubia"
+        },
+        {
+            "distance": 111.0,
+            "neighbor": "Dakahlia"
+        },
+        {
+            "distance": 127.0,
+            "neighbor": "Cairo"
+        }
+    ],
+    "Sohag": [
+        {
+            "distance": 134.0,
+            "neighbor": "Asyut"
+        },
+        {
+            "distance": 160.0,
+            "neighbor": "Qena"
+        }
+    ],
+    "South Sinai": [
+        {
+            "distance": 129.0,
+            "neighbor": "North Sinai"
+        },
+        {
+            "distance": 183.0,
+            "neighbor": "Red Sea"
+        }
+    ],
+    "Suez": [
+        {
+            "distance": 116.0,
+            "neighbor": "Cairo"
+        },
+        {
+            "distance": 65.0,
+            "neighbor": "Ismailia"
+        },
+        {
+            "distance": 260.0,
+            "neighbor": "Red Sea"
+        }
+    ]
+}
