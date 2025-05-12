@@ -9,7 +9,7 @@
             "neighbor": "Kafr El Sheikh"
         },
         {
-            "distance": 211.0,
+            "distance": 100.0,
             "neighbor": "Matrouh"
         }
     ],
@@ -205,16 +205,16 @@
     ],
     "Matrouh": [
         {
-            "distance": 211.0,
-            "neighbor": "Alexandria"
-        },
-        {
             "distance": 170.0,
             "neighbor": "Beheira"
         },
         {
             "distance": 440.0,
             "neighbor": "New Valley"
+        },
+        {
+            "distance": 211.0,
+            "neighbor": "Alexandria"
         }
     ],
     "Minya": [

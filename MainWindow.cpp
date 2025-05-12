@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include "MapWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Initialize windows
+    // Initialize windows to nullptr
     graphOperationsWindow = nullptr;
     graphTraversalWindow = nullptr;
     shortestPathWindow = nullptr;
@@ -50,7 +51,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 
-    // Clean up
+    // Clean up child windows
     if (graphOperationsWindow) delete graphOperationsWindow;
     if (graphTraversalWindow) delete graphTraversalWindow;
     if (shortestPathWindow) delete shortestPathWindow;
@@ -72,14 +73,28 @@ void MainWindow::closeEvent(QCloseEvent *event)
         errorMessages += QString("Failed to save graph: %1\n").arg(e.what());
     }
 
-    // Save city positions
-    try {
-        mapWindow->getMapVisualization()->saveCityPositionsToFile(cityPositionsFilename);
+    // Save city positions only if mapWindow exists and has mapVisualization
+    if (mapWindow) {
+        MapVisualization* mapVis = mapWindow->getMapVisualization();
+        if (mapVis) {
+            try {
+                mapVis->saveCityPositionsToFile(cityPositionsFilename);
+                positionsSaved = true;
+            }
+            catch (const std::runtime_error& e) {
+                errorMessages += QString("Failed to save city positions: %1").arg(e.what());
+            }
+        } else {
+            // If mapWindow exists but mapVisualization doesn't (shouldn't happen),
+            // treat positions as not saved.
+            positionsSaved = false;
+            errorMessages += QString("Map visualization component not found for saving positions.\n");
+        }
+    } else {
+        // If mapWindow didn't exist, consider positions saved (or not applicable)
         positionsSaved = true;
     }
-    catch (const std::runtime_error& e) {
-        errorMessages += QString("Failed to save city positions: %1").arg(e.what());
-    }
+
 
     if (graphSaved && positionsSaved) {
         event->accept();
@@ -104,9 +119,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_btnGraphOperations_clicked()
 {
     if (!graphOperationsWindow) {
-        graphOperationsWindow = new GraphOperationsWindow(&graph, this);
+        // Pass the mapWindow instance to the GraphOperationsWindow constructor
+        graphOperationsWindow = new GraphOperationsWindow(&graph, mapWindow, this);
         connect(graphOperationsWindow, &GraphOperationsWindow::destroyed, this, &MainWindow::onGraphChanged);
     } else {
+        // If the window already exists, just refresh its city list
         graphOperationsWindow->refreshCityList();
     }
     graphOperationsWindow->show();
@@ -136,9 +153,10 @@ void MainWindow::on_btnShortestPath_clicked()
 }
 
 void MainWindow::on_btnMapVisualization_clicked() {
-    mapWindow = new MapWindow(&graph, this);
+    // Create mapWindow only if it doesn't exist
+    if (!mapWindow) {
+        mapWindow = new MapWindow(&graph, this);
 
-    /* if (!mapWindow) {
         // Load city positions from the file specified earlier
         if (!mapWindow->getMapVisualization()->loadCityPositionsFromFile(cityPositionsFilename)) {
             // If loading fails, it will use default positions
@@ -146,14 +164,19 @@ void MainWindow::on_btnMapVisualization_clicked() {
                                  "City positions file could not be loaded. Using default positions.");
         }
     } else {
+        // If mapWindow already exists, just refresh it
         mapWindow->refreshMap();
-    } */
+    }
 
-    // Reset visualization before showing the map
-    mapWindow->getMapVisualization()->setSelectedCity("");
-    mapWindow->getMapVisualization()->setVisitedCities(QStringList());
-    mapWindow->getMapVisualization()->setCurrentPath(QStringList());
-    mapWindow->getMapVisualization()->update();
+    // Reset visualization state before showing/activating
+    MapVisualization* mapVis = mapWindow->getMapVisualization();
+    if (mapVis) {
+        mapVis->setSelectedCity("");
+        mapVis->setVisitedCities(QStringList());
+        mapVis->setCurrentPath(QStringList());
+        mapVis->update(); // Trigger a repaint
+    }
+
 
     mapWindow->show();
     mapWindow->activateWindow();
@@ -161,7 +184,20 @@ void MainWindow::on_btnMapVisualization_clicked() {
 
 void MainWindow::onGraphChanged()
 {
+    // This slot is connected to the destroyed signal of the operations window.
+    // It should trigger updates in other windows that display graph data.
+
+    // Update other windows that might be open and need graph changes reflected
+    if (graphOperationsWindow) {
+        graphOperationsWindow->refreshCityList();
+    }
+    if (graphTraversalWindow) {
+        graphTraversalWindow->refreshCityList();
+    }
+    if (shortestPathWindow) {
+        shortestPathWindow->refreshCityList();
+    }
     if (mapWindow) {
-        mapWindow->updateMap();
+        mapWindow->updateMap(); // Update map with changes (like added/deleted cities/roads)
     }
 }

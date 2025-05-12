@@ -1,12 +1,15 @@
 #include "graphoperationswindow.h"
 #include "MapVisualization.h"
+#include "MapWindow.h"
 #include "ui_graphoperationswindow.h"
 #include <QMessageBox>
+#include <QRegularExpression>
 
-GraphOperationsWindow::GraphOperationsWindow(Graph* graph, QWidget *parent) :
+GraphOperationsWindow::GraphOperationsWindow(Graph* graph, MapWindow* mapWindow, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GraphOperationsWindow),
-    graph(graph)
+    graph(graph),
+    mapWindow(mapWindow)
 {
     ui->setupUi(this);
     setWindowTitle("Graph Operations");
@@ -77,20 +80,41 @@ void GraphOperationsWindow::on_btnAddCity_clicked()
 {
     QString cityName = ui->cityNameLineEdit->text().trimmed(); // Get city name from input, remove extra spaces
 
+    // Check 1: Empty name
     if (cityName.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Please enter a city name.");
         return;
     }
 
-    // Add city to graph
+    // Check 2: Invalid characters
+    QRegularExpression validCityName("^[a-zA-Z0-9\\s\\-']+$");
+    if (!validCityName.match(cityName).hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "City name contains invalid characters. Please use only letters, numbers, spaces, hyphens, or apostrophes.");
+        ui->cityNameLineEdit->clear();
+        return;
+    }
+
+    // Check 3: City already exists
+    if (graph->getAllCities().count(cityName.toStdString())) {
+        QMessageBox::warning(this, "Input Error", "City '" + cityName + "' already exists.");
+        ui->cityNameLineEdit->clear();
+        return;
+    }
+
     graph->addCity(cityName.toStdString());
 
-    // Show position dialog to set the position of the new city
-    MapVisualization* mapVis = dynamic_cast<MapVisualization*>(
-        parent()->findChild<MapVisualization*>());
+    if (!mapWindow) {
+        mapWindow = new MapWindow(graph, this->parentWidget());
+    }
+
+    // Ensure mapVisualization is accessible
+    MapVisualization* mapVis = mapWindow->getMapVisualization();
 
     if (mapVis) {
+        // Show position dialog to set the position of the new city
         mapVis->showCityPositionDialog(cityName);
+    } else {
+        QMessageBox::warning(this, "Visualization Error", "Could not access map visualization to set city position.");
     }
 
     // Update city list
@@ -127,6 +151,16 @@ void GraphOperationsWindow::on_btnDeleteCity_clicked()
         // Update city list
         updateCityList();
 
+        // Also remove the city position from map visualization if mapWindow exists
+        if (mapWindow) {
+            MapVisualization* mapVis = mapWindow->getMapVisualization();
+            if(mapVis) {
+                mapVis->removeCityPosition(cityName);
+                mapWindow->updateMap(); // Refresh map display
+            }
+        }
+
+
         // Show success message
         QMessageBox::information(this, "Success", "City '" + cityName + "' deleted successfully.");
     }
@@ -160,6 +194,11 @@ void GraphOperationsWindow::on_btnAddRoad_clicked()
 
     // Add road to graph
     graph->addRoad(fromCity.toStdString(), toCity.toStdString(), distance);
+
+    // Update map visualization if mapWindow exists
+    if (mapWindow) {
+        mapWindow->updateMap();
+    }
 
     // Clear input
     ui->distanceLineEdit->clear();
@@ -196,6 +235,11 @@ void GraphOperationsWindow::on_btnDeleteRoad_clicked()
     if (reply == QMessageBox::Yes) {
         // Delete road from graph
         graph->deleteRoad(fromCity.toStdString(), toCity.toStdString());
+
+        // Update map visualization if mapWindow exists
+        if (mapWindow) {
+            mapWindow->updateMap();
+        }
 
         // Show success message
         QMessageBox::information(this, "Success", "Road deleted successfully between " + fromCity + " and " + toCity + ".");

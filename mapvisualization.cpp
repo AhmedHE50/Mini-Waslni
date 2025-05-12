@@ -140,6 +140,11 @@ bool MapVisualization::saveCityPositionsToFile(const QString& filePath)
     return true;
 }
 
+void MapVisualization::removeCityPosition(const QString& cityName)
+{
+    cityPositions.remove(cityName);
+}
+
 void MapVisualization::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);

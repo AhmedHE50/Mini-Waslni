@@ -5,31 +5,31 @@ using json = nlohmann::json;
 
 // Load graph data from a JSON file
 void FileManager::loadGraph(Graph& graph, const string& filename) {
-	ifstream in(filename);
+    ifstream in(filename);
 
-	if (!in.is_open())
-		throw runtime_error("Cannot open file: " + filename);
+    if (!in.is_open())
+        throw runtime_error("Cannot open file: " + filename);
 
     // Read the JSON data from the file
-	json j;
-	in >> j;
+    json j;
+    in >> j;
 
     CityGraph& cities = graph.getAllCities(); // Get a reference to the graph's city data
     cities.clear(); // Clear any existing city data
 
     // Iterate through each city
-	for (auto& city : j.items()) {
+    for (auto& city : j.items()) {
         cities[city.key()] = {};
 
-		if (city.value().is_array()) {
+        if (city.value().is_array()) {
             // Iterate through each neighbor of the city
-			for (auto& neighbor : city.value()) {
-				if (neighbor.contains("neighbor") && neighbor.contains("distance")) {
-					cities[city.key()].emplace_back(neighbor["neighbor"], neighbor["distance"]);
-				}
-			}
-		}
-	}
+            for (auto& neighbor : city.value()) {
+                if (neighbor.contains("neighbor") && neighbor.contains("distance")) {
+                    cities[city.key()].emplace_back(neighbor["neighbor"], neighbor["distance"]);
+                }
+            }
+        }
+    }
 }
 
 // Save graph data to a JSON file

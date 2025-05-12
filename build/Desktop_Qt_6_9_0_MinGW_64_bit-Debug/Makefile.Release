@@ -355,6 +355,8 @@ release/moc_GraphOperationsWindow.cpp: ../../GraphOperationsWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../Graph.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
@@ -566,35 +568,13 @@ release/moc_GraphTraversalWindow.cpp: ../../GraphTraversalWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../Graph.h \
 		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include D:/University/DS/Mini-Waslni/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -ID:/University/DS/Mini-Waslni -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\GraphTraversalWindow.h -o release\moc_GraphTraversalWindow.cpp
@@ -800,46 +780,25 @@ release/moc_MainWindow.cpp: ../../MainWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Graph.h \
-		../../FileManager.h \
 		../../graphoperationswindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../graphtraversalwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		../../shortestpathwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
@@ -1047,37 +1006,17 @@ release/moc_ShortestPathWindow.cpp: ../../ShortestPathWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
 		../../Graph.h \
 		../../MapWindow.h \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include D:/University/DS/Mini-Waslni/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -ID:/University/DS/Mini-Waslni -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\ShortestPathWindow.h -o release\moc_ShortestPathWindow.cpp
@@ -1484,36 +1423,10 @@ release/moc_mapvisualization.cpp: ../../mapvisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		../../Graph.h \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include D:/University/DS/Mini-Waslni/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -ID:/University/DS/Mini-Waslni -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mapvisualization.h -o release\moc_mapvisualization.cpp
@@ -1720,36 +1633,14 @@ release/moc_mapwindow.cpp: ../../mapwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
 		../../Graph.h \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		release/moc_predefs.h \
 		C:/Qt/6.9.0/mingw_64/bin/moc.exe
 	C:\Qt\6.9.0\mingw_64\bin\moc.exe $(DEFINES) --include D:/University/DS/Mini-Waslni/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.0/mingw_64/mkspecs/win32-g++ -ID:/University/DS/Mini-Waslni -IC:/Qt/6.9.0/mingw_64/include -IC:/Qt/6.9.0/mingw_64/include/QtWidgets -IC:/Qt/6.9.0/mingw_64/include/QtGui -IC:/Qt/6.9.0/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mapwindow.h -o release\moc_mapwindow.cpp
@@ -2007,36 +1898,17 @@ release/GraphOperationsWindow.o: ../../GraphOperationsWindow.cpp ../../graphoper
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../Graph.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
+		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
@@ -2248,36 +2120,13 @@ release/GraphTraversalWindow.o: ../../GraphTraversalWindow.cpp ../../graphtraver
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../Graph.h \
 		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
-		../../FileManager.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
@@ -2285,6 +2134,10 @@ release/GraphTraversalWindow.o: ../../GraphTraversalWindow.cpp ../../graphtraver
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QCheckBox \
@@ -2501,51 +2354,34 @@ release/MainWindow.o: ../../MainWindow.cpp ../../mainwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Graph.h \
-		../../FileManager.h \
 		../../graphoperationswindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../graphtraversalwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		../../shortestpathwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QFileDialog \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
@@ -2756,38 +2592,17 @@ release/ShortestPathWindow.o: ../../ShortestPathWindow.cpp ../../shortestpathwin
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
 		../../Graph.h \
 		../../MapWindow.h \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
-		../../FileManager.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
@@ -2795,8 +2610,13 @@ release/ShortestPathWindow.o: ../../ShortestPathWindow.cpp ../../shortestpathwin
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ShortestPathWindow.o ..\..\ShortestPathWindow.cpp
 
 release/citypositiondialog.o: ../../citypositiondialog.cpp ../../CityPositionDialog.h \
@@ -3209,45 +3029,24 @@ release/main.o: ../../main.cpp C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplicati
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Graph.h \
-		../../FileManager.h \
 		../../graphoperationswindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../graphtraversalwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimer.h \
 		../../MapWindow.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		../../shortestpathwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
 
@@ -3449,15 +3248,19 @@ release/mapvisualization.o: ../../mapvisualization.cpp ../../MapVisualization.h 
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
+		../../Graph.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
@@ -3472,27 +3275,22 @@ release/mapvisualization.o: ../../mapvisualization.cpp ../../MapVisualization.h 
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../Graph.h \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QFileDialog \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
+		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../CityPositionDialog.h \
+		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mapvisualization.o ..\..\mapvisualization.cpp
 
 release/mapwindow.o: ../../mapwindow.cpp ../../MapWindow.h \
@@ -3697,36 +3495,14 @@ release/mapwindow.o: ../../mapwindow.cpp ../../MapWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qstringlistmodel.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.0/mingw_64/include/QtGui/QShowEvent \
 		../../Graph.h \
+		../../FileManager.h \
 		../../MapVisualization.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QPointF \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QMap \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonarray.h \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
-		C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
-		../../CityPositionDialog.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
 		ui_mapwindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
@@ -3741,11 +3517,16 @@ release/mapwindow.o: ../../mapwindow.cpp ../../MapWindow.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmessagebox.h \
-		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mapwindow.o ..\..\mapwindow.cpp
 
 release/moc_GraphOperationsWindow.o: release/moc_GraphOperationsWindow.cpp 

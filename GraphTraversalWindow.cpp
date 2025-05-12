@@ -143,13 +143,26 @@ void GraphTraversalWindow::displayTraversalResult(const std::vector<std::string>
 {
     QString result = "Traversal Order:\n";
 
-    for (size_t i = 0; i < path.size(); ++i) {
-        result += QString::number(i + 1) + ". " + QString::fromStdString(path[i]);
+    if (path.empty() && !graph->getAllCities().empty()) {
+        // Handle case where the start city might not exist or has no connections
+        result = "Traversal did not start or reach any cities from the selected start city.\n";
+    } else {
+        for (size_t i = 0; i < path.size(); ++i) {
+            result += QString::number(i + 1) + ". " + QString::fromStdString(path[i]);
 
-        if (i < path.size() - 1) {
-            result += "\n";
+            if (i < path.size() - 1) {
+                result += "\n";
+            }
         }
     }
+
+    // Check for disconnected graph
+    if (graph->getAllCities().size() > 0 && path.size() < graph->getAllCities().size()) {
+        result += "\n\nNote: The graph might be disconnected. The traversal did not reach all cities.";
+    } else if (graph->getAllCities().empty()) {
+        result += "\n\nNote: The graph is empty.";
+    }
+
 
     ui->traversalResultsTextEdit->setText(result);
 }
