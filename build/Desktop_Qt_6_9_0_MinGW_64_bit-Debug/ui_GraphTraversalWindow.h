@@ -30,12 +30,14 @@ public:
     QGroupBox *traversalGroup;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
-    QLabel *label;
+    QLabel *label600;
     QComboBox *startCityComboBox;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *btnBFS;
-    QPushButton *btnDFS;
+    QLabel *label_speed;
+    QComboBox *visualizationSpeedComboBox;
     QHBoxLayout *horizontalLayout_3;
+    QPushButton *btnDFS;
+    QPushButton *btnBFS;
     QGroupBox *resultsGroup;
     QVBoxLayout *verticalLayout_3;
     QTextEdit *traversalResultsTextEdit;
@@ -56,10 +58,10 @@ public:
         verticalLayout_2->setObjectName("verticalLayout_2");
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        label = new QLabel(traversalGroup);
-        label->setObjectName("label");
+        label600 = new QLabel(traversalGroup);
+        label600->setObjectName("label600");
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(label600);
 
         startCityComboBox = new QComboBox(traversalGroup);
         startCityComboBox->setObjectName("startCityComboBox");
@@ -71,21 +73,31 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        btnBFS = new QPushButton(traversalGroup);
-        btnBFS->setObjectName("btnBFS");
+        label_speed = new QLabel(traversalGroup);
+        label_speed->setObjectName("label_speed");
 
-        horizontalLayout_2->addWidget(btnBFS);
+        horizontalLayout_2->addWidget(label_speed);
 
-        btnDFS = new QPushButton(traversalGroup);
-        btnDFS->setObjectName("btnDFS");
+        visualizationSpeedComboBox = new QComboBox(traversalGroup);
+        visualizationSpeedComboBox->setObjectName("visualizationSpeedComboBox");
 
-        horizontalLayout_2->addWidget(btnDFS);
+        horizontalLayout_2->addWidget(visualizationSpeedComboBox);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
+        btnDFS = new QPushButton(traversalGroup);
+        btnDFS->setObjectName("btnDFS");
+
+        horizontalLayout_3->addWidget(btnDFS);
+
+        btnBFS = new QPushButton(traversalGroup);
+        btnBFS->setObjectName("btnBFS");
+
+        horizontalLayout_3->addWidget(btnBFS);
+
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
@@ -130,9 +142,10 @@ public:
     {
         GraphTraversalWindow->setWindowTitle(QCoreApplication::translate("GraphTraversalWindow", "Graph Traversal", nullptr));
         traversalGroup->setTitle(QCoreApplication::translate("GraphTraversalWindow", "Graph Traversal", nullptr));
-        label->setText(QCoreApplication::translate("GraphTraversalWindow", "Start City:", nullptr));
-        btnBFS->setText(QCoreApplication::translate("GraphTraversalWindow", "Breadth-First Search (BFS)", nullptr));
+        label600->setText(QCoreApplication::translate("GraphTraversalWindow", "Start City:", nullptr));
+        label_speed->setText(QCoreApplication::translate("GraphTraversalWindow", "Visualization Speed:", nullptr));
         btnDFS->setText(QCoreApplication::translate("GraphTraversalWindow", "Depth-First Search (DFS)", nullptr));
+        btnBFS->setText(QCoreApplication::translate("GraphTraversalWindow", "Breadth-First Search (BFS)", nullptr));
         resultsGroup->setTitle(QCoreApplication::translate("GraphTraversalWindow", "Traversal Results", nullptr));
         btnClose->setText(QCoreApplication::translate("GraphTraversalWindow", "Close", nullptr));
     } // retranslateUi

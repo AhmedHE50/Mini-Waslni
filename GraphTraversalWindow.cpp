@@ -21,6 +21,7 @@ GraphTraversalWindow::GraphTraversalWindow(Graph* graph, MapWindow* mapWindow, Q
 
     // Update city list
     updateCityList();
+    updateVisualizationSpeedList();
 
     // Setup combo box
     ui->startCityComboBox->setModel(cityListModel);
@@ -171,7 +172,13 @@ void GraphTraversalWindow::startTraversalVisualization(const std::vector<std::st
     currentTraversalPath = path;
     currentTraversalStep = 0;
     resetVisualization();
-    traversalTimer->setInterval(100); // Set a fixed animation speed
+
+    // Calculate the interval based on the selected speed
+    int speedIndex = ui->visualizationSpeedComboBox->currentIndex();
+    int baseInterval = 500; // Default 1x speed is 500ms
+    int interval = baseInterval / (speedIndex + 1);
+
+    traversalTimer->setInterval(interval);
     traversalTimer->start();
     ui->btnBFS->setEnabled(false);
     ui->btnDFS->setEnabled(false);
@@ -186,6 +193,15 @@ void GraphTraversalWindow::resetVisualization()
         mapWindow->getMapVisualization()->setProperty("currentPath", QStringList());
         mapWindow->getMapVisualization()->update();
     }
+}
+
+void GraphTraversalWindow::updateVisualizationSpeedList()
+{
+    QStringList speeds;
+    speeds << "1x" << "2x" << "3x" << "4x" << "5x";
+    ui->visualizationSpeedComboBox->clear();
+    ui->visualizationSpeedComboBox->addItems(speeds);
+    ui->visualizationSpeedComboBox->setCurrentIndex(0); // Default to 1x
 }
 
 void GraphTraversalWindow::showNextTraversalStep()
@@ -236,26 +252,48 @@ void GraphTraversalWindow::highlightCurrentStep()
         visitedCities.append(currentCity);
     }
 
-    // Update the current path if there's a previous city
+    // Update the current path and highlighted roads
+    QStringList currentPath;
+    QStringList highlightedRoads;
+
     if (currentTraversalStep > 0) {
         QString prevCity = QString::fromStdString(currentTraversalPath[currentTraversalStep - 1]);
-        QStringList currentPath;
-        QVariant pathVar = visualization->property("currentPath");
-        if (pathVar.isValid()) {
-            currentPath = pathVar.toStringList();
+
+        // Get the route between the previous and current city
+        const CityGraph& cities = graph->getAllCities();
+        auto prevCityIt = cities.find(prevCity.toStdString());
+        if (prevCityIt != cities.end()) {
+            const auto& connections = prevCityIt->second;
+
+            // Check if there's a direct connection to the current city
+            auto connectionIt = std::find_if(connections.begin(), connections.end(),
+                                             [&currentCity](const std::pair<std::string, double>& connection) {
+                                                 return connection.first == currentCity.toStdString();
+                                             });
+
+            if (connectionIt != connections.end()) {
+                // Create a road identifier that includes both cities
+                QString roadId = prevCity + "|" + currentCity;
+                highlightedRoads.append(roadId);
+
+                // Reverse direction (since it's an undirected graph)
+                QString reverseRoadId = currentCity + "|" + prevCity;
+                highlightedRoads.append(reverseRoadId);
+            }
         }
 
-        // Add the edge (two city names) to represent the path
+        // Add cities to the current path
         currentPath.append(prevCity);
         currentPath.append(currentCity);
-
-        // Update the property
-        visualization->setProperty("currentPath", currentPath);
     }
 
     // Set the selected city
     visualization->setProperty("selectedCity", currentCity);
     visualization->setProperty("visitedCities", visitedCities);
+    visualization->setProperty("currentPath", currentPath);
+
+    // Add a new property for highlighted roads
+    visualization->setProperty("highlightedRoads", highlightedRoads);
 
     // Repaint the map
     visualization->update();

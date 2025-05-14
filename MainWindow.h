@@ -38,8 +38,12 @@ public:
         return cityPositionsFilename;
     }
 
+    void setBackgroundImage(const QString& imagePath, qreal blurRadius = 10.0);
+
 protected:
-    void closeEvent(QCloseEvent *event) override; // Handles window close events
+    void closeEvent(QCloseEvent *event) override;
+    void resizeEvent(QResizeEvent* event) override;
+    QPixmap blurImage(const QPixmap& original, qreal blurRadius);
 
 private slots:
     void on_btnGraphOperations_clicked();
@@ -53,6 +57,7 @@ private:
     Graph graph;
     QString graphDataFilename;
     QString cityPositionsFilename;
+    QString backgroundFilename;
 
     // Pointers to child windows
     GraphOperationsWindow *graphOperationsWindow;

@@ -19,15 +19,15 @@ const int selectedCityRadius = 10;
 const int visitedCityRadius = 9;
 
 const QColor cityColor = Qt::green;
-const QColor selectedCityColor = Qt::red;
-const QColor visitedCityColor = Qt::darkBlue;
+const QColor selectedCityColor = Qt::cyan;
+const QColor visitedCityColor = Qt::darkCyan;
 const QColor cityBorderColor = Qt::darkGray;
 
 const int roadWidth = 2;
 const int selectedRoadWidth = 3;
 
 const QColor roadColor = Qt::gray;
-const QColor traversedRoadColor = Qt::red;
+const QColor traversedRoadColor = Qt::darkGreen;
 
 
 class MapVisualization : public QWidget

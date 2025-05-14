@@ -22,6 +22,7 @@ ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidg
 
     updateCityList();
     updateAlgorithmList();
+    updateVisualizationSpeedList();
 
     ui->sourceCityComboBox->setModel(cityListModel);
     ui->destCityComboBox->setModel(cityListModel);
@@ -35,19 +36,14 @@ ShortestPathWindow::ShortestPathWindow(Graph* graph, MapWindow* mapWindow, QWidg
         QDialog {
             background-color: #f0f0f0;
         }
-        #btnFindPath {
-            background-color: #ff9800; /* (orange) */
-            color: white;
-        }
-        #btnFindPath:hover {
-            background-color: #fb8c00; /* (dark orange) */
-        }
     )");
 
     // Initialize the map window if it exists
     if (mapWindow) {
         setMapWindow(mapWindow);
     }
+
+    on_algorithmComboBox_currentIndexChanged(0);
 }
 
 ShortestPathWindow::~ShortestPathWindow()
@@ -88,6 +84,15 @@ void ShortestPathWindow::updateAlgorithmList()
 void ShortestPathWindow::refreshCityList()
 {
     updateCityList();
+}
+
+void ShortestPathWindow::on_algorithmComboBox_currentIndexChanged(int index)
+{
+    if (index == DIJKSTRA) {
+        ui->btnFindPath->setText("Find Shortest Path");
+    } else if (index == KRUSKAL_MST) {
+        ui->btnFindPath->setText("Find MST");
+    }
 }
 
 void ShortestPathWindow::on_btnFindPath_clicked()
@@ -413,8 +418,13 @@ void ShortestPathWindow::startPathVisualization()
     // Disable the find path button during animation
     ui->btnFindPath->setEnabled(false);
 
+    // Calculate the interval based on the selected speed
+    int speedIndex = ui->visualizationSpeedComboBox->currentIndex();
+    int baseInterval = 500; // Default 1x speed is 500ms
+    int interval = baseInterval / (speedIndex + 1);
+
     // Start the animation timer
-    pathAnimationTimer->setInterval(100);
+    pathAnimationTimer->setInterval(interval);
     pathAnimationTimer->start();
 }
 
@@ -430,6 +440,15 @@ void ShortestPathWindow::resetVisualization()
             visualization->update();
         }
     }
+}
+
+void ShortestPathWindow::updateVisualizationSpeedList()
+{
+    QStringList speeds;
+    speeds << "1x" << "2x" << "3x" << "4x" << "5x";
+    ui->visualizationSpeedComboBox->clear();
+    ui->visualizationSpeedComboBox->addItems(speeds);
+    ui->visualizationSpeedComboBox->setCurrentIndex(0); // Default to 1x
 }
 
 void ShortestPathWindow::showNextPathStep()

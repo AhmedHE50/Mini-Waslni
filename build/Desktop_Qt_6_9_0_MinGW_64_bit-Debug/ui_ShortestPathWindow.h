@@ -28,12 +28,14 @@ public:
     QVBoxLayout *verticalLayout;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QLabel *label;
+    QLabel *label500;
     QComboBox *sourceCityComboBox;
     QLabel *label_2;
     QComboBox *destCityComboBox;
     QLabel *label_3;
     QComboBox *algorithmComboBox;
+    QLabel *label_4;
+    QComboBox *visualizationSpeedComboBox;
     QPushButton *btnFindPath;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_2;
@@ -50,10 +52,10 @@ public:
         groupBox->setObjectName("groupBox");
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName("gridLayout");
-        label = new QLabel(groupBox);
-        label->setObjectName("label");
+        label500 = new QLabel(groupBox);
+        label500->setObjectName("label500");
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        gridLayout->addWidget(label500, 0, 0, 1, 1);
 
         sourceCityComboBox = new QComboBox(groupBox);
         sourceCityComboBox->setObjectName("sourceCityComboBox");
@@ -80,10 +82,20 @@ public:
 
         gridLayout->addWidget(algorithmComboBox, 2, 1, 1, 1);
 
+        label_4 = new QLabel(groupBox);
+        label_4->setObjectName("label_4");
+
+        gridLayout->addWidget(label_4, 3, 0, 1, 1);
+
+        visualizationSpeedComboBox = new QComboBox(groupBox);
+        visualizationSpeedComboBox->setObjectName("visualizationSpeedComboBox");
+
+        gridLayout->addWidget(visualizationSpeedComboBox, 3, 1, 1, 1);
+
         btnFindPath = new QPushButton(groupBox);
         btnFindPath->setObjectName("btnFindPath");
 
-        gridLayout->addWidget(btnFindPath, 3, 1, 1, 1);
+        gridLayout->addWidget(btnFindPath, 4, 1, 1, 1);
 
 
         verticalLayout->addWidget(groupBox);
@@ -111,9 +123,10 @@ public:
     {
         ShortestPathWindow->setWindowTitle(QCoreApplication::translate("ShortestPathWindow", "Shortest Path Finder", nullptr));
         groupBox->setTitle(QCoreApplication::translate("ShortestPathWindow", "Find Shortest Path", nullptr));
-        label->setText(QCoreApplication::translate("ShortestPathWindow", "Source City:", nullptr));
+        label500->setText(QCoreApplication::translate("ShortestPathWindow", "Source City:", nullptr));
         label_2->setText(QCoreApplication::translate("ShortestPathWindow", "Destination City:", nullptr));
         label_3->setText(QCoreApplication::translate("ShortestPathWindow", "Algorithm:", nullptr));
+        label_4->setText(QCoreApplication::translate("ShortestPathWindow", "Visualization Speed:", nullptr));
         btnFindPath->setText(QCoreApplication::translate("ShortestPathWindow", "Find Shortest Path", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("ShortestPathWindow", "Shortest Path Results", nullptr));
     } // retranslateUi

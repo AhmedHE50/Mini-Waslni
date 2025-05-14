@@ -43,6 +43,7 @@ private:
     // Traversal Visualization
     void displayTraversalResult(const std::vector<std::string>& path); // Text
     void startTraversalVisualization(const std::vector<std::string>& path); // Animation
+    void updateVisualizationSpeedList();
     void resetVisualization();
     void highlightCurrentStep();
 };

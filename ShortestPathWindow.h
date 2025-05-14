@@ -8,6 +8,14 @@
 #include "Graph.h"
 #include "MapWindow.h"
 
+enum VisualizationSpeed {
+    SPEED_1X = 0,
+    SPEED_2X = 1,
+    SPEED_3X = 2,
+    SPEED_4X = 3,
+    SPEED_5X = 4
+};
+
 namespace Ui {
 class ShortestPathWindow;
 }
@@ -23,6 +31,7 @@ public:
     void setMapWindow(MapWindow* mapWindow);
 
 private slots:
+    void on_algorithmComboBox_currentIndexChanged(int index);
     void on_btnFindPath_clicked();
     void on_sourceCityComboBox_currentIndexChanged(int index);
     void on_destCityComboBox_currentIndexChanged(int index);
@@ -51,6 +60,7 @@ private:
     std::vector<std::string> reconstructPath(const std::string& start, const std::string& end);
     void startPathVisualization(); // Animation
     void resetVisualization();
+    void updateVisualizationSpeedList();
     void highlightPathText(int step);
 
     // Algorithm-specific functions

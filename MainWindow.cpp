@@ -3,6 +3,12 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QPalette>
+#include <QPixmap>
+#include <QGraphicsBlurEffect>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
+#include <QPainter>
 #include "MapWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,15 +26,18 @@ MainWindow::MainWindow(QWidget *parent)
     // Set default filename for saving
     graphDataFilename = "graph_data.json";
     cityPositionsFilename = "city_positions.json";
+    backgroundFilename = "background.jpg";
+
+    setBackgroundImage(backgroundFilename, 3.0);
 
     setWindowTitle("Mini Waslni");
 
     setStyleSheet(R"(
-        QMainWindow {
-            background-color: #f0f0f0; /* (light gray) */
+        #label {
+            color: white;
         }
         QPushButton {
-            background-color: #4CAF50; /* (green) */ /* change to this #2196F3 (blue) */
+            background-color: #4D55CC;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -39,10 +48,10 @@ MainWindow::MainWindow(QWidget *parent)
             border-radius: 8px;
         }
         QPushButton:hover {
-            background-color: #45a049; /* (dark green) */
+            background-color: #3F47B2;
         }
         QPushButton:pressed {
-            background-color: #3e8e41;
+            background-color: #2F3799;
         }
     )");
 }
@@ -116,6 +125,52 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
+QPixmap MainWindow::blurImage(const QPixmap& original, qreal blurRadius)
+{
+    // Create a graphics scene and item
+    QGraphicsScene scene;
+    QGraphicsPixmapItem* item = new QGraphicsPixmapItem(original);
+    scene.addItem(item);
+
+    // Create and apply blur effect
+    QGraphicsBlurEffect* blurEffect = new QGraphicsBlurEffect();
+    blurEffect->setBlurRadius(blurRadius);
+    item->setGraphicsEffect(blurEffect);
+
+    // Render the blurred image
+    QPixmap blurredPixmap(original.size());
+    blurredPixmap.fill(Qt::transparent);
+    QPainter painter(&blurredPixmap);
+    scene.render(&painter);
+
+    return blurredPixmap;
+}
+
+void MainWindow::setBackgroundImage(const QString& imagePath, qreal blurRadius)
+{
+    // Create a pixmap from the image
+    QPixmap originalImage(imagePath);
+
+    // Check if image is valid
+    if (originalImage.isNull()) {
+        qWarning() << "Failed to load background image:" << imagePath;
+        return;
+    }
+
+    // Blur the image
+    QPixmap blurredImage = blurImage(originalImage, blurRadius);
+
+    // Create a palette with the blurred background image
+    QPalette palette;
+    palette.setBrush(QPalette::Window, blurredImage);
+
+    // Apply the palette to the main window
+    this->setPalette(palette);
+
+    // Ensure the background is drawn
+    this->setAutoFillBackground(true);
+}
+
 void MainWindow::on_btnGraphOperations_clicked()
 {
     if (!graphOperationsWindow) {
@@ -180,6 +235,16 @@ void MainWindow::on_btnMapVisualization_clicked() {
 
     mapWindow->show();
     mapWindow->activateWindow();
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+    QMainWindow::resizeEvent(event);
+
+    // If you want to dynamically rescale background on resize
+    if (!backgroundFilename.isEmpty()) {
+        setBackgroundImage(backgroundFilename, 3.0);
+    }
 }
 
 void MainWindow::onGraphChanged()

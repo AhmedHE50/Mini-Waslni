@@ -181,6 +181,30 @@ void GraphOperationsWindow::on_btnAddRoad_clicked()
         return;
     }
 
+    QString fromCity = cityList.at(fromIndex);
+    QString toCity = cityList.at(toIndex);
+
+    const CityGraph& cities = graph->getAllCities();
+
+    auto fromCityIt = cities.find(fromCity.toStdString());
+
+    bool roadExists = false;
+    if (fromCityIt != cities.end()) {
+        const list<pair<string, double>>& neighbors = fromCityIt->second;
+
+        for (const auto& neighborPair : neighbors) {
+            if (neighborPair.first == toCity.toStdString()) {
+                roadExists = true;
+                break;
+            }
+        }
+    }
+
+    if (roadExists) {
+        QMessageBox::warning(this, "Input Error", "A road already exists between " + fromCity + " and " + toCity + ".");
+        return;
+    }
+
     bool ok;
     double distance = ui->distanceLineEdit->text().toDouble(&ok); // Get distance, convert to double
 
@@ -188,9 +212,6 @@ void GraphOperationsWindow::on_btnAddRoad_clicked()
         QMessageBox::warning(this, "Input Error", "Please enter a valid positive distance.");
         return;
     }
-
-    QString fromCity = cityList.at(fromIndex);
-    QString toCity = cityList.at(toIndex);
 
     // Add road to graph
     graph->addRoad(fromCity.toStdString(), toCity.toStdString(), distance);

@@ -1,3 +1,0 @@
-﻿  Graph.cpp
-C:\Users\Joudy\source\repos\Mini-Waslni\Mini_Waslni\Graph.cpp(256,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Mini_Waslni.vcxproj -> C:\Users\Joudy\Source\Repos\Mini-Waslni\x64\Debug\Mini_Waslni.exe
