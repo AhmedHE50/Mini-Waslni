@@ -25,7 +25,7 @@ public:
     void addCity(const string& cityName);
     void addRoad(const string& fromCity, const string& toCity, double dist);
     void deleteCity(const string& cityName);
-    void deleteRoad(const string& fromCity, const string& toCity);
+    bool deleteRoad(const string& fromCity, const string& toCity);
 
     // Graph Traversal
     vector<string> BFS(const string& cityName);

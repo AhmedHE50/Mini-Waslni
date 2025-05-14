@@ -160,6 +160,8 @@ void GraphOperationsWindow::on_btnDeleteCity_clicked()
             }
         }
 
+        // Clear input
+        ui->distanceLineEdit->clear();
 
         // Show success message
         QMessageBox::information(this, "Success", "City '" + cityName + "' deleted successfully.");
@@ -254,16 +256,23 @@ void GraphOperationsWindow::on_btnDeleteRoad_clicked()
                                   QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
-        // Delete road from graph
-        graph->deleteRoad(fromCity.toStdString(), toCity.toStdString());
+        // Delete road from graph success
+        if(graph->deleteRoad(fromCity.toStdString(), toCity.toStdString())){
+            // Update map visualization if mapWindow exists
+            if (mapWindow) {
+                mapWindow->updateMap();
+            }
 
-        // Update map visualization if mapWindow exists
-        if (mapWindow) {
-            mapWindow->updateMap();
+            // Show success message
+            QMessageBox::information(this, "Success", "Road deleted successfully between " + fromCity + " and " + toCity + ".");
+        }
+        else{
+            // Show success message
+            QMessageBox::information(this, "Failed", "There is no road exist between " + fromCity + " and " + toCity + ".");
         }
 
-        // Show success message
-        QMessageBox::information(this, "Success", "Road deleted successfully between " + fromCity + " and " + toCity + ".");
+        // Clear input
+        ui->distanceLineEdit->clear();
     }
 }
 

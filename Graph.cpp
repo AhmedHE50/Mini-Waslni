@@ -77,11 +77,11 @@ void Graph::deleteCity(const string& cityName) {
     }
 }
 
-void Graph::deleteRoad(const string& fromCity, const string& toCity) {
+bool Graph::deleteRoad(const string& fromCity, const string& toCity) {
     // Ensure both cities exist
     if (cities.find(fromCity) == cities.end() || cities.find(toCity) == cities.end()) {
         cout << "One or both cities do not exist." << endl;
-        return;
+        return false;
     }
 
     // Delete the road from fromCity -> toCity
@@ -119,7 +119,10 @@ void Graph::deleteRoad(const string& fromCity, const string& toCity) {
     }
     else {
         cout << "Road between '" << fromCity << "' and '" << toCity << "' does not exist." << endl;
+        return false;
     }
+
+    return true;
 }
 
 vector<string> Graph::BFS(const string& cityName) {
